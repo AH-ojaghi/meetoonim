@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    src: url("\Yekan.ttf");
+    font-family: "Yekan";
+    font-style: normal;
+  }
+}
+
+@layer base {
+  body {
+    background: #f5f5f5;
+    font-family: "Yekan", sans-serif;
+  }
+}
+
+html {
+  scrollbar-width: none;
+}
+
+html {
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
