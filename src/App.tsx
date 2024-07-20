@@ -12,6 +12,7 @@ export default function App() {
       {/* <Slider/> */}
       <BottomMenu />
       <MobileAddMenu />
+
     </>
   );
 }
