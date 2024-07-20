@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaRegSquarePlus } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosBook } from "react-icons/io";
@@ -19,65 +19,71 @@ const addMenuItems = [
   { icon: <IoIosBook className="text-[1.6rem]" />, label: "بروژه" },
   { icon: <MdOutlineAssignmentInd className="text-[1.6rem]" />, label: "شغل" },
 ];
+
 export default function AddMenu() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const headerMenu = document.querySelector(".header-menu");
- //
-  const OpenMenu = () => {
-    headerMenu?.classList.add("md:block");
-    setIsOpenMenu(true);
-    document.querySelector(".close-menu")?.classList.remove("hidden");
+  const [isShowModal, setIsShowModal] = useState(false);
+  const headerMenuRef = useRef(null);
+  const closeMenuRef = useRef(null);
+
+  const toggleMenu = () => {
+    setIsOpenMenu(!isOpenMenu);
   };
-//
-  const postModal = (e) =>{
-  let addItems = e.currentTarget.childNodes[1].innerText;
-  if(addItems === "بست") document.querySelector(".post-modal")?.classList.add('block')
-  return;
-  }
-//
-  const closeMenu = () => {
-    headerMenu?.classList.remove("md:block");
-    headerMenu?.classList.add("hidden");
-    document.querySelector(".close-menu")?.classList.add("hidden");
+
+  const postModal = (e) => {
+    let addItems = e.currentTarget.childNodes[1].innerText;
+    if (addItems === "بست") {
+      setIsShowModal(true);
+    }
     setIsOpenMenu(false);
   };
-//
+
+  useEffect(() => {
+    if (isShowModal) setIsOpenMenu(false);
+  }, [isShowModal]);
+
+  const closeMenu = () => {
+    setIsOpenMenu(false);
+  };
+
   return (
-    <div className="hidden md:flex gap-5 lg:gap-0 justify-center items-center">
-      <div className=" hidden post-modal">
-        <Modal />
-      </div>
+    <>
+    <div className="hidden md:flex gap-5 lg:gap-0 justify-center items-center animat">
+      {/* <div className="translate-y-10"> */}
+        <Modal showModal={isShowModal} setShowModal={setIsShowModal} />
+      {/* </div> */}
+      {isOpenMenu && (
+        <div
+          ref={closeMenuRef}
+          className="bg-transparent w-full h-full z-20 fixed close-menu"
+          onClick={closeMenu}
+        ></div>
+      )}
       <div
-        className="hidden bg-transparent w-[160rem] h-[120rem] z-20 fixed close-menu"
-        onClick={closeMenu}
-      ></div>
-      <div
-        id="header-menu"
+        ref={headerMenuRef}
         className={`${
-          isOpenMenu  && "h-[153px] py-[9px]"
-        } z-20 header-menu duration-300 py-0 h-0  shadow-[0_1px_12px_-0px_rgba(0,0,0,0.2)]  pr-4 border-none absolute w-[7rem] top-[13.99px] right-[8.9rem] border-2 rounded-md bg-white`}
+          isOpenMenu ? "h-[153px] py-[9px]" : "h-0 py-0"
+        } z-20 header-menu duration-300 shadow-[0_1px_12px_-0px_rgba(0,0,0,0.2)] pr-4 border-none absolute w-[7rem] top-[13.99px] right-[8.9rem] border-2 rounded-md bg-white`}
       >
         {addMenuItems.map((item) => (
           <div
             key={item.label}
             onClick={postModal}
-            className={` items-center h-0  text-slate-500/85 gap-x-0 ${
-              !isOpenMenu && "hidden text-[0px]"
-            } ${
-              isOpenMenu &&
-              " items-center h-[48.32px] flex gap-x-1 text-[15px]"
+            className={`${
+              isOpenMenu
+                ? "flex items-center h-[48.32px] gap-x-1 text-[15px] text-slate-500/85"
+                : "hidden"
             }`}
           >
             {item.icon}
-            <p className=" text-black">{item.label}</p>
+            <p className="text-black">{item.label}</p>
           </div>
         ))}
       </div>
-      <div 
-      className="group cursor-pointer relative">
+      <div className="group cursor-pointer relative">
         <div
-          onClick={OpenMenu}
-          className="flex gap-x-2  justify-center items-center bg-sky-50 text-sky-400 rounded-lg border-[1.59px] py-[5.22px] px-[7.5px] border-sky-400 outline-0"
+          onClick={toggleMenu}
+          className="flex gap-x-2 justify-center items-center bg-sky-50 text-sky-400 rounded-lg border-[1.59px] py-[5.22px] px-[7.5px] border-sky-400 outline-0"
         >
           <IoIosArrowDown className="text-xl" />
           <div className="flex justify-center gap-x-[1px] items-center">
@@ -87,5 +93,6 @@ export default function AddMenu() {
         </div>
       </div>
     </div>
+    </>
   );
 }

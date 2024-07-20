@@ -16,7 +16,7 @@ export default function BottomMenu() {
     <div className="bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] fixed md:hidden bottom-0 w-full flex items-center justify-between py-[8.1px] px-[22px] text-slate-500 font-bold text-sm gap-x-5 ">
       <img src="/digiKala.png" alt="" className="w-10 rounded-full" />
       {itemsMenu.map((item) => (
-        <div className="grid justify-items-center ">
+        <div className="grid justify-items-center" key={item.label}>
           {item.icon}
           <p className={`${item.label === "خانه" && "text-sky-400"}`}>
             {item.label}
