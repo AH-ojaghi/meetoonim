@@ -30,14 +30,14 @@ const toggleMenu = () =>{
           </div>
         </div>
 
-        <div className=" z-20 header-menu absolute -mt-1 px-2 py-2 border-2 rounded-md bg-white ">
+        {/* <div className=" z-20 header-menu absolute -mt-1 px-2 py-2 border-2 rounded-md bg-white ">
           {addMenuItems.map((item) => (
             <div key={item.label} className="flex gap-1">
             {item.icon}
               <p>{item.label}</p>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -22,7 +22,13 @@ export default function Content() {
         time="11 ماه بیش"
         postText="بیشرفت مداوم را با کار گزاری مفید تجربه کنید."
         actions={cardItems}
-      />
+      />      <Card
+      logo="/vite.svg"
+      companyName="کارگزاری مفید"
+      time="11 ماه بیش"
+      postText="بیشرفت مداوم را با کار گزاری مفید تجربه کنید."
+      actions={cardItems}
+    />
       <Card
         logo="/digiKala.png"
         companyName="دیجی کالا"
@@ -32,6 +38,23 @@ export default function Content() {
         commentsCount="3 نظر"
         actions={cardItems}
       >
+        
+        <Comment
+          logo="/vite.svg"
+          username="علی کاظمی"
+          time="6 ماه بیش"
+          text="خیلی هم عالی"
+        />
+      </Card> <Card
+        logo="/digiKala.png"
+        companyName="دیجی کالا"
+        time="7 ماه بیش"
+        postText="بیشرفت مداوم را با دیجی کالا تجربه کنید."
+        image="/akhenaten.jpg"
+        commentsCount="3 نظر"
+        actions={cardItems}
+      >
+        
         <Comment
           logo="/vite.svg"
           username="علی کاظمی"
