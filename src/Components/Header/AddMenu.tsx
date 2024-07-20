@@ -13,7 +13,6 @@ const addMenuItems = [
 export default function AddMenu() {
 
 const toggleMenu = () =>{
-
   let headerMenu =document.querySelector('.header-menu');
   console.log(headerMenu);
    headerMenu?.classList.toggle('hidden')  

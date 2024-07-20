@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoEarthSharp } from "react-icons/io5";
 import { GoDotFill } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -11,7 +11,12 @@ function Action({ img, text }) {
     </div>
   );
 }
-
+const a = [
+  { name: "اشتراک گذاری" },
+  { name: "بلاک کردن" },
+  { name: "دنبال کردن" },
+  { name: "دوستی" },
+];
 export default function Card({
   logo,
   companyName,
@@ -22,6 +27,24 @@ export default function Card({
   actions,
   children,
 }) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleClickOutside = (event: any) => {
+    if (!event.target.closest(".dropdown")) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
   return (
     <div className=" mb-2 md:rounded-xl md:mb-4 bg-white border border-slate-200">
       <div className="px-[17.3px] py-3 flex justify-between">
@@ -36,9 +59,39 @@ export default function Card({
             </div>
           </div>
         </div>
-        <BsThreeDotsVertical className="text-slate-400 mt-[0.85px] text-xl " />
+        <div>
+          <div className="bg-white flex flex-col items-center justify-center">
+            <div className="dropdown relative inline-block">
+              <button
+                onClick={toggleDropdown}
+                className="dropbtn  py-2 px-4 rounded focus:outline-none "
+              >
+                <BsThreeDotsVertical />
+              </button>
+              <div
+                id="myDropdown"
+                className={`dropdown-content absolute right-0 mt-2 w-40 bg-white shadow-lg rounded ${
+                  dropdownOpen ? "block" : "hidden"
+                }`}
+              >
+                <div className="z-20">
+
+                {a.map((item) => (
+                  <>
+                    <a className="  grid px-4 py-2 text-black bg-red-600">
+                      {item.name}
+                    </a>
+                  </>
+                ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <p className="px-3 pb-[0.60rem] pt-2 mb-[0.3rem] text-black/90 text-sm">{postText}</p>
+      <p className="px-3 pb-[0.60rem] pt-2 mb-[0.3rem] text-black/90 text-sm">
+        {postText}
+      </p>
       {image && <img src={image} alt="" className="h-[23rem] mt-3 w-full" />}
       {commentsCount && (
         <p className="text-left px-3 text-black/50 text-xs my-2">
