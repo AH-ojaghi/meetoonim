@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import { IoEarthSharp } from "react-icons/io5";
 import { GoDotFill } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { FcLike } from "react-icons/fc";
+function Action({ img, text  }: { img: React.ReactNode; text: string }) {
+  const [color, setColor] = useState("black");
+const HandelColor =()=>{
+  //اینجا گفتیم اگر text  با کلمه بسندیدن  برابر باشه قرمز اگر نه مشکی 
+  const newColor = text === "بسندیدن" ? "red" : "black";
+    setColor(prevColor => prevColor === newColor ? "black" : newColor);
+}
 
-function Action({ img, text }: { img: React.ReactNode; text: string }) {
-  // const colors = ["black", "red"];
-  // const [color, setColor] = useState(colors[0]);
-  // const handleClick = () => {
-  //   const currentIndex = colors.indexOf(color);
-  //   const nextIndex = (currentIndex + 1) % colors.length;
-  //   setColor(colors[nextIndex]);
-  // }
   return (
     <div className="grid gap-y-1  justify-items-center">
-      <div>{img}</div>
+      <div  onClick={HandelColor} style={{color}}>{img}</div>
       <p className="font-bold">{text}</p>
     </div>
   );
@@ -46,6 +46,7 @@ export default function Card({
   children?: React.ReactNode;
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [select, setSelectedAction] = useState<string>("");
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -81,10 +82,13 @@ export default function Card({
         <div className=" flex justify-end  h-fit ">
           <div className="dropdown relative  inline-block">
             <button
-              onClick={toggleDropdown}
+              onClick={() => {
+                toggleDropdown();
+               
+              }}
               className="dropbtn rounded focus:outline-none text-start"
             >
-              <BsThreeDotsVertical />
+               {select === "menu" ? <FcLike /> : <BsThreeDotsVertical />}
             </button>
             <div
               id="myDropdown"
@@ -115,6 +119,7 @@ export default function Card({
       )}
       <div className="flex justify-around text-slate-60 py-2 text-[0.63rem] font-bold text-black/60 border-t">
         {actions.map((item, index) => {
+          
           return (
             <>
               <Action key={index} img={item.img} text={item.label} />
