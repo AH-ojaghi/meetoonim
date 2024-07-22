@@ -21,12 +21,6 @@ const addMenuItems = [
 ];
 
 export default function AddMenu() {
-
-const toggleMenu = () =>{
-  let headerMenu =document.querySelector('.header-menu');
-  console.log(headerMenu);
-   headerMenu?.classList.toggle('hidden')  
-}
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
   const headerMenuRef = useRef(null);
@@ -54,50 +48,47 @@ const toggleMenu = () =>{
 
   return (
     <>
-    <div className="hidden md:flex gap-5 lg:gap-0 justify-center items-center animat">
-    {/* <Modal showModal={isShowModal} setShowModal={setIsShowModal} /> */}
-      {/* <div className="translate-y-10"> */}
-      {/* </div> */}
-      {isOpenMenu && (
-        <div
-          ref={closeMenuRef}
-          className="bg-transparent w-full h-full z-20 fixed close-menu"
-          onClick={closeMenu}
-        ></div>
-      )}
-      <div
-        ref={headerMenuRef}
-        className={`${
-          isOpenMenu ? "h-[153px] py-[9px]" : "h-0 py-0"
-        } z-20 header-menu duration-300 shadow-[0_1px_12px_-0px_rgba(0,0,0,0.2)] pr-4 border-none absolute w-[7rem] top-[13.99px] right-[8.9rem] border-2 rounded-md bg-white`}
-      >
-        {addMenuItems.map((item) => (
+      <div className="hidden md:flex gap-5 lg:gap-0 justify-center items-center animat">
+        {isOpenMenu && (
           <div
-            key={item.label}
-            onClick={postModal}
-            className={`${
-              isOpenMenu
-                ? "flex items-center h-[48.32px] gap-x-1 text-[15px] text-slate-500/85"
-                : "hidden"
-            }`}
-          >
-            {item.icon}
-            <p className="text-black">{item.label}</p>
-          </div>
-        ))}
-      </div>
-      <div className="group cursor-pointer relative">
+            ref={closeMenuRef}
+            className="bg-transparent w-full h-full z-20 fixed close-menu"
+            onClick={closeMenu}
+          ></div>
+        )}
         <div
-          onClick={toggleMenu}
-          className="flex gap-x-2 justify-center items-center bg-sky-50 text-sky-400 rounded-lg border-[1.59px] py-[5.22px] px-[7.5px] border-sky-400 outline-0"
+          ref={headerMenuRef}
+          className={`${
+            isOpenMenu ? "h-[153px] py-[9px]" : "h-0 py-0"
+          } z-20 header-menu duration-300 shadow-[0_1px_12px_-0px_rgba(0,0,0,0.2)] pr-4 border-none absolute w-[7rem] top-[13.99px] right-[8.9rem] border-2 rounded-md bg-white`}
         >
-          <IoIosArrowDown className="text-xl" />
-          <div className="flex justify-center gap-x-[1px] items-center">
-            <p>افزودن</p>
-            <FaRegSquarePlus className="text-xl" />
-          </div>
+          {addMenuItems.map((item) => (
+            <div
+              key={item.label}
+              onClick={postModal}
+              className={`${
+                isOpenMenu
+                  ? "flex items-center h-[48.32px] gap-x-1 text-[15px] text-slate-500/85"
+                  : "hidden"
+              }`}
+            >
+              {item.icon}
+              <p className="text-black">{item.label}</p>
+            </div>
+          ))}
         </div>
-        {/* <div className=" z-20 header-menu absolute -mt-1 px-2 py-2 border-2 rounded-md bg-white ">
+        <div className="group cursor-pointer relative">
+          <div
+            onClick={toggleMenu}
+            className="flex gap-x-2 justify-center items-center bg-sky-50 text-sky-400 rounded-lg border-[1.59px] py-[5.22px] px-[7.5px] border-sky-400 outline-0"
+          >
+            <IoIosArrowDown className="text-xl" />
+            <div className="flex justify-center gap-x-[1px] items-center">
+              <p>افزودن</p>
+              <FaRegSquarePlus className="text-xl" />
+            </div>
+          </div>
+          {/* <div className=" z-20 header-menu absolute -mt-1 px-2 py-2 border-2 rounded-md bg-white ">
           {addMenuItems.map((item) => (
             <div key={item.label} className="flex gap-1">
             {item.icon}
@@ -105,8 +96,8 @@ const toggleMenu = () =>{
             </div>
           ))}
         </div> */}
+        </div>
       </div>
-    </div>
     </>
   );
 }
