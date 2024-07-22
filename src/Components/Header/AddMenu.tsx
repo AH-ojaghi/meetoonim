@@ -55,8 +55,8 @@ const toggleMenu = () =>{
   return (
     <>
     <div className="hidden md:flex gap-5 lg:gap-0 justify-center items-center animat">
+    {/* <Modal showModal={isShowModal} setShowModal={setIsShowModal} /> */}
       {/* <div className="translate-y-10"> */}
-        <Modal showModal={isShowModal} setShowModal={setIsShowModal} />
       {/* </div> */}
       {isOpenMenu && (
         <div
