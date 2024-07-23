@@ -3,7 +3,9 @@ import { IoEarthSharp } from "react-icons/io5";
 import { GoDotFill } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FcLike } from "react-icons/fc";
-import { FaRegHeart } from "react-icons/fa6";
+import { FaRegBookmark, FaRegHeart } from "react-icons/fa6";
+import { FaRegCommentAlt } from "react-icons/fa";
+import { MdOutlineIosShare } from "react-icons/md";
 function Action({ img, text }: { img: React.ReactNode; text: string }) {
   const [color, setColor] = useState("black");
 
@@ -24,6 +26,15 @@ function Action({ img, text }: { img: React.ReactNode; text: string }) {
     </div>
   );
 }
+const cardItems = [
+  { img: <FaRegHeart className="text-[18px]" />, label: "بسندیدن" },
+  { img: <FaRegCommentAlt className="text-[16px]" />, label: "نظرات" },
+  {
+    img: <MdOutlineIosShare className="text-[20px] -mt-[2px]" />,
+    label: "اشتراک گذاری",
+  },
+  { img: <FaRegBookmark className="text-[16px]" />, label: "ذخیره" },
+];
 
 const actionsList = [
   { name: "اشتراک گذاری" },
@@ -33,19 +44,28 @@ const actionsList = [
 ];
 
 export default function Card({
-  description
+  description,
+  created_at,
+  f_name,
+  l_name,
+  open_to_image,
+  thumbnail,
+  comments_count,
 }: {
-  description: string
+  description: string;
+  created_at: string;
+  f_name: string;
+  l_name: string;
+  open_to_image: string;
+  thumbnail: string;
+  comments_count: string;
 }) {
-  
-
-
-
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [favoriteIndex, setFavoriteIndex] = useState<null | number>(null);
   const toggleFavorite = (index: null) => {
     setFavoriteIndex((prevIndex) => (prevIndex === index ? null : index)); // Toggle favorite state
   };
+  const eachThumbnail = thumbnail.split(",");
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -65,91 +85,106 @@ export default function Card({
   }, []);
 
   return (
-    <div>
-      <p>{description}</p>
-    </div>
-  )
+    <div className="mb-2 md:rounded-xl md:mb-4 bg-white border border-slate-200">
+      <div className="px-[17.3px] py-3 w-full flex justify-between">
+        <div className="flex gap-3">
+          <img
+            src={open_to_image ? `https://meetoonim.com/${open_to_image}` : "/"}
+            alt={open_to_image}
+            className="w-10 rounded-full"
+          />
 
-  // return (
-  //   <div className="mb-2 md:rounded-xl md:mb-4 bg-white border border-slate-200">
-  //     <div className="px-[17.3px] py-3 w-full flex justify-between">
-  //       <div className="flex gap-3">
-  //         <img src={logo} alt={companyName} className="w-10" />
-  //         <div className="flex justify-center items-start flex-col"  >
-  //           <p className="bg-red-600 w-[10px] h-[10px]">{}</p>
-  //           <p className="text-black/90">{companyName}</p>
-  //           <div className="flex justify-center items-center gap-[2px]">
-  //             <p className="text-[0.6rem] text-slate-400">{time}</p>
-  //             <GoDotFill className="text-slate-400 text-[7px]" />
-  //             <IoEarthSharp className="text-slate-400 text-[10px]" />
-  //           </div>
-  //         </div>
-  //       </div>
-  //       <div className=" flex justify-end  h-fit ">
-  //         <div className="dropdown relative  inline-block">
-  //           <button
-  //             onClick={() => {
-  //               toggleDropdown();
-  //             }}
-  //             className="dropbtn rounded focus:outline-none text-start"
-  //           >
-  //             <BsThreeDotsVertical />
-  //           </button>
-  //           <div
-  //             id="myDropdown"
-  //             className={`dropdown z-10 absolute w-36 mt-2 left-0 bg-white border border-gray-200 rounded shadow-lg transition-all duration-500 ${
-  //               dropdownOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
-  //             } overflow-hidden`}
-  //           >
-  //             {actionsList.map((item, index) => (
-  //               <a
-  //                 key={index}
-  //                 className="block px-4 py-2 text-black hover:bg-gray-200"
-  //               >
-  //                 {item.name}
-  //               </a>
-  //             ))}
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //     <p className="px-3 pb-[0.60rem] pt-2 mb-[0.3rem] text-black/90 text-sm">
-  //       {postText}
-  //     </p>
-  //     {image && <img src={image} alt="" className="h-[23rem] mt-3 w-full" />}
-  //     {commentsCount && (
-  //       <p className="text-left px-3 text-black/50 text-xs my-2">
-  //         {commentsCount}
-  //       </p>
-  //     )}
-  //     <div className="flex justify-around text-slate-60 py-2 text-[0.63rem] font-bold text-black/60 border-t">
-  //       {actions.map((item, index: any) => {
-  //         return (
-  //           <div
-  //             key={index}
-  //             onClick={() => item.label === "بسندیدن" && toggleFavorite(index)}
-  //           >
-  //             {favoriteIndex === index ? (
-  //               <div className="">
-  //                 <Action
-  //                   img={
-  //                     item.label === "بسندیدن" ? (
-  //                       <FcLike className="text-[19px] -mt-[2px]" />
-  //                     ) : (
-  //                       item.img
-  //                     )
-  //                   }
-  //                   text={item.label}
-  //                 />
-  //               </div>
-  //             ) : (
-  //               <Action img={item.img} text={item.label} />
-  //             )}
-  //           </div>
-  //         );
-  //       })}
-  //     </div>
-  //     {children}
-  //   </div>
-  // );
+          <div className="flex justify-center items-start flex-col">
+            <p className=" w-[10px] h-[10px]"></p>
+            <p className="text-black/90 flex gap-1">
+              
+              {f_name}
+              <p>{l_name}</p>
+            </p>
+            <div className="flex justify-center items-center gap-[2px]">
+              <p className="text-[0.6rem] text-slate-400">{created_at}</p>
+              <GoDotFill className="text-slate-400 text-[7px]" />
+              <IoEarthSharp className="text-slate-400 text-[10px]" />
+            </div>
+          </div>
+        </div>
+        <div className=" flex justify-end  h-fit ">
+          <div className="dropdown relative  inline-block">
+            <button
+              onClick={() => {
+                toggleDropdown();
+              }}
+              className="dropbtn rounded focus:outline-none text-start"
+            >
+              <BsThreeDotsVertical />
+            </button>
+            <div
+              id="myDropdown"
+              className={`dropdown z-10 absolute w-36 mt-2 left-0 bg-white border border-gray-200 rounded shadow-lg transition-all duration-500 ${
+                dropdownOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
+              } overflow-hidden`}
+            >
+              {actionsList.map((item, index) => (
+                <a
+                  key={index}
+                  className="block px-4 py-2 text-black hover:bg-gray-200"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <p className="px-3 pb-[0.60rem] pt-2 mb-[0.3rem] text-black/90 text-sm flex  justify-between">
+        {description}
+      </p>
+      {thumbnail && (
+        <div>
+          {...eachThumbnail.map((t) => (
+            <img
+              src={thumbnail ? `https://meetoonim.com/${t}` : "/"}
+              alt={thumbnail}
+              className="h-[23rem] mt-3 w-full"
+            />
+          ))}
+        </div>
+      )}
+      <div className="justify-end flex h-[30px] items-center ml-2">
+      {comments_count ? (
+              <p className="font-B  text-[10px] text-[#a6a6a6] flex gap-1">{comments_count}<p className="text-[#a6a6a6]">نظر</p></p>
+
+      ):""}
+
+      </div>
+      <div className="flex justify-around text-slate-60 py-2 text-[0.63rem] font-bold text-black/60 border-t">
+        {cardItems.map((item, index: any) => {
+          return (
+            <div
+              key={index}
+              onClick={() => item.label === "بسندیدن" && toggleFavorite(index)}
+            >
+              {favoriteIndex === index ? (
+                <div className="">
+                  <Action
+                    img={
+                      item.label === "بسندیدن" ? (
+                        <FcLike className="text-[19px] -mt-[2px]" />
+                      ) : (
+                        item.img
+                      )
+                    }
+                    text={item.label}
+                  />
+                </div>
+              ) : (
+                <Action img={item.img} text={item.label} />
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <div></div>
+    </div>
+  );
 }

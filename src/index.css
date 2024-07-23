@@ -28,3 +28,7 @@ html {
 html::-webkit-scrollbar {
   display: none;
 }
+@font-face {
+  font-family: B;
+  src: url("../public/BByakan.ttf") format("truetype");
+}

@@ -4,6 +4,9 @@ export default {
   theme: {
 
     extend: {
+      fontFamily:{
+        B:["B"],
+      },
       screens: {
         'xs': "420px",
         'xls':'920px',
