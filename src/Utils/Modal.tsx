@@ -1,74 +1,43 @@
-import { useEffect, useRef } from "react";
+//modal
 import { HiCamera } from "react-icons/hi2";
 import { AiFillPicture } from "react-icons/ai";
+import { IoCloseOutline } from "react-icons/io5";
+//modal
 
-export default function Modal({ showModal, setShowModal }) {
-  const bgModal = useRef(null);
-  const contentModal = useRef(null);
+function Modal() {
 
-  //
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
-  if (showModal) {
-    setTimeout(() => {
-      bgModal?.classList.remove("hidden");
-      contentModal?.classList.remove("hidden");
-    }, 1000);
-  }
-  if (!showModal) {
-    setTimeout(() => {
-      bgModal?.classList.add("hidden");
-      contentModal?.classList.add("hidden");
-    }, 1000);
-  }
 
   return (
     <div
-      id="bg-modal"
-      onClick={closeModal}
-      className={`w-screen duration-300 bg-black/40 ${
-        showModal ? "h-0" : "h-full"
-      }`}
+      className=" bg-black/40 w-full h-full fixed inset-0 z-50 "
     >
-      <div
-        id="bg-modal"
-        className={`w-screen duration-200 h-screen z-50 bg-black/40 fixed inset-0 ${
-          !showModal && "h-0 "
-        }  ${showModal && "h-full "}`}
-        onClick={closeModal}
-      ></div>
-    //
-    //
-    //////////////////
-    <div
-      className={`rounded-lg duration-200 z-50 ${!showModal && "h-0"} ${
-        showModal && "h-[95%]"
-      }  bg-gray-100 fixed pb-5 inset-x-5 inset-y-[18.5px] max-w-[37.5rem] mx-auto`}
-    >
-    <div className="  bg-red-50 w-full  h-full  ">
-
-        <p
-          className=" mt-[14px] text-lg font-bold px-[20px]"
-        >
-          افزودن پست
-        </p>
-        <div className=" justify-start gap-2 items-center px-[20px] flex w-full">
-          <img src="/digiKala.png" alt="" className="rounded-full w-14 my-6" />
-          <p className="text-[15.2px]">دیجیکالا</p>
+      <div className=" bg-gray-50 max-w-[602px] relative w-full h-screen md:top-5 md:h-[93.35%] px-[26px] pt-[14px] rounded-lg sm:mx-auto">
+        <div className="flex absolute bg-transparent z-50 max-w-[602px] w-5/6 left-[12%]  h-[53px] md:hidden ">
+          <IoCloseOutline className="text-[27px] w-fit h-fit -mr-[5px] " />
+          <p className="text-xl text-sky-400 h-fit text-center  mx-auto">
+            ایجاد پست
+          </p>
         </div>
-
-        <div className=" grid border rounded-xl px-[20px] border-slate-200 bg-white mx-[26.5px] mt-2 h-[15.1rem]">
-          <p className="mt-3 text-[1.19rem] font-bold text-sky-400">توضیحات</p>
+        <p className="text-lg font-bold h-fit mt-[4.7rem] md:mt-0 -mr-[6px]  ">
+          افزودن پست{" "}
+        </p>
+        <div className="flex h-fit items-center gap-x-3 -mr-[6px] mt-[2.7rem] mb-[41.4px] md:mt-[1.5rem] md:mb-[55px] ">
+          <img src="/digiKala.png" alt="" className="rounded-full w-14" />
+          <p className="text-sm font-bold ml-3 md:-mt-[1px] md:text-[15px] ">
+            دیجیکالا
+          </p>
+        </div>
+        <div className="border rounded-xl border-slate-200 h-[15.35rem] -mt-2 px-5  md:mx-[1px] md:-mt-[23px]">
+          <p className=" text-lg  font-bold text-sky-400 my-[8px] ">توضیحات</p>
           <textarea
-            name="post"
-            className=" hover:bg-gray-100 text-black w-full h-[11.2rem] mt-2 resize-none outline-none px-3 mb-10  rounded-xl text-[0.9rem]"
-            placeholder="توضیحات خود را اینجا بنویسید"
+            name="postContent"
+            className=" resize-none bg-gray-100  rounded-xl text-[15px] h-[11.5rem] p-1 px-3  w-full  outline-none"
+            placeholder="توضیحات خود را اینجا بنویسد"
+            style={{ lineHeight: "1.1" }}
+            id=""
           ></textarea>
         </div>
-
-        <div className=" text-sky-400 bg-white absolute bottom-0 flex w-full rounded-b-lg items-center justify-between px-2 py-4">
+        <div className=" text-sky-400 bg-white flex w-full max-w-[602px] md:bottom-[1px] rounded-b-lg items-center absolute bottom-[4px] justify-between right-0 px-2 py-3 md:py-4">
           <div className="flex gap-3 text-[1.65rem]">
             <AiFillPicture className="rounded-[15px]" />
             <HiCamera />
@@ -79,10 +48,7 @@ export default function Modal({ showModal, setShowModal }) {
         </div>
       </div>
     </div>
-   
   );
 }
 
-
-
-export default Modal
+export default Modal;
