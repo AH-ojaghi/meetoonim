@@ -37,6 +37,8 @@ export default function Content() {
           open_to_image={card.user.open_to_image}
           thumbnail={card.media.map((item:any)=>item.thumbnail).join(",")}
           comments_count={card.comments_count}
+          likes_count={card.likes_count}
+          comment={card.comments.map((item:any)=>item.comment).join(",")}
         />
       ))}
     </div>

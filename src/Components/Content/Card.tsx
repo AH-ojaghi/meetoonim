@@ -51,6 +51,8 @@ export default function Card({
   open_to_image,
   thumbnail,
   comments_count,
+  likes_count,
+  comment,
 }: {
   description: string;
   created_at: string;
@@ -59,12 +61,15 @@ export default function Card({
   open_to_image: string;
   thumbnail: string;
   comments_count: string;
+  likes_count: number;
+  comment:string
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [favoriteIndex, setFavoriteIndex] = useState<null | number>(null);
   const toggleFavorite = (index: null) => {
-    setFavoriteIndex((prevIndex) => (prevIndex === index ? null : index)); // Toggle favorite state
+    setFavoriteIndex((prevIndex) => (prevIndex === index ? null : index));
   };
+
   const eachThumbnail = thumbnail.split(",");
 
   const toggleDropdown = () => {
@@ -97,7 +102,6 @@ export default function Card({
           <div className="flex justify-center items-start flex-col">
             <p className=" w-[10px] h-[10px]"></p>
             <p className="text-black/90 flex gap-1">
-              
               {f_name}
               <p>{l_name}</p>
             </p>
@@ -150,12 +154,15 @@ export default function Card({
           ))}
         </div>
       )}
-      <div className="justify-end flex h-[30px] items-center ml-2">
-      {comments_count ? (
-              <p className="font-B  text-[10px] text-[#a6a6a6] flex gap-1">{comments_count}<p className="text-[#a6a6a6]">نظر</p></p>
-
-      ):""}
-
+      <div className="justify-end flex h-[20px] items-center ml-2">
+        {comments_count ? (
+          <p className="font-B  text-[10px] text-[#a6a6a6] flex gap-1">
+            {comments_count}
+            <p className="text-[#a6a6a6]">نظر</p>
+          </p>
+        ) : (
+          ""
+        )}
       </div>
       <div className="flex justify-around text-slate-60 py-2 text-[0.63rem] font-bold text-black/60 border-t">
         {cardItems.map((item, index: any) => {
@@ -184,7 +191,31 @@ export default function Card({
           );
         })}
       </div>
-      <div></div>
+      {
+        <div className="w-full flex justify-center gap-3">
+          <img src={open_to_image ? `https://meetoonim.com/${open_to_image}` : "/"} className="bg-blue-400 w-[40px] h-[50px]  rounded-full" />
+
+          <div className="w-[500px] h-[60px] rounded-[10px] flex justify-between ">
+            <div className="flex  flex-col">
+              <div className="flex items-center justify-center">
+                <p className="text-[10px]">فروشگاه دیجیکالا</p>
+                <p className="text-[10px] text-[#9797bd]">{created_at}</p>
+              </div>
+              <div className="flex  items-center">
+                <p className="text-[11px]">{comment}</p>
+              </div>
+            </div>
+
+            <div
+              onClick={() => toggleFavorite}
+              className="flex items-center justify-center gap-3"
+            >
+              <p>{likes_count}</p>
+              <div>{favoriteIndex ? <FcLike /> : <FaRegHeart />}</div>
+            </div>
+          </div>
+        </div>
+      }
     </div>
   );
 }
