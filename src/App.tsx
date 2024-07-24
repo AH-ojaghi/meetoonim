@@ -11,7 +11,7 @@ export default function App() {
       <LandingPage />
       <BottomMenu />
       <MobileAddMenu />
-      <Modal />
+      {/* <Modal /> */}
     </>
   );
 }

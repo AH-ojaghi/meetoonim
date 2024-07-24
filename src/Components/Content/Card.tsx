@@ -66,6 +66,7 @@ export default function Card({
     setFavoriteIndex((prevIndex) => (prevIndex === index ? null : index)); // Toggle favorite state
   };
   const eachThumbnail = thumbnail.split(",");
+console.log(eachThumbnail);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -97,7 +98,6 @@ export default function Card({
           <div className="flex justify-center items-start flex-col">
             <p className=" w-[10px] h-[10px]"></p>
             <p className="text-black/90 flex gap-1">
-              
               {f_name}
               <p>{l_name}</p>
             </p>
@@ -140,22 +140,28 @@ export default function Card({
         {description}
       </p>
       {thumbnail && (
-        <div>
-          {...eachThumbnail.map((t) => (
-            <img
-              src={thumbnail ? `https://meetoonim.com/${t}` : "/"}
-              alt={thumbnail}
-              className="h-[23rem] mt-3 w-full"
-            />
-          ))}
+        <div className=" flex overflow-x-scroll">
+          {...eachThumbnail.map((imdAdd) => {
+
+            return (
+              <img
+                src={thumbnail ? `https://meetoonim.com/${imdAdd}` : "/"}
+                alt={thumbnail}
+                className="h-[23rem] mt-3 w-full"
+              />
+            );
+          })}
         </div>
       )}
       <div className="justify-end flex h-[30px] items-center ml-2">
-      {comments_count ? (
-              <p className="font-B  text-[10px] text-[#a6a6a6] flex gap-1">{comments_count}<p className="text-[#a6a6a6]">نظر</p></p>
-
-      ):""}
-
+        {comments_count ? (
+          <p className="font-B  text-[10px] text-[#a6a6a6] flex gap-1">
+            {comments_count}
+            <p className="text-[#a6a6a6]">نظر</p>
+          </p>
+        ) : (
+          ""
+        )}
       </div>
       <div className="flex justify-around text-slate-60 py-2 text-[0.63rem] font-bold text-black/60 border-t">
         {cardItems.map((item, index: any) => {
