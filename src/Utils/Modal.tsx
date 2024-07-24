@@ -5,12 +5,8 @@ import { IoCloseOutline } from "react-icons/io5";
 //modal
 
 function Modal() {
-
-
   return (
-    <div
-      className=" bg-black/40 w-full h-full fixed inset-0 z-50 "
-    >
+    <div className=" bg-black/40 w-full h-full fixed inset-0 z-50 ">
       <div className=" bg-gray-50 max-w-[602px] relative w-full h-screen md:top-5 md:h-[93.35%] px-[26px] pt-[14px] rounded-lg sm:mx-auto">
         <div className="flex absolute bg-transparent z-50 max-w-[602px] w-5/6 left-[12%]  h-[53px] md:hidden ">
           <IoCloseOutline className="text-[27px] w-fit h-fit -mr-[5px] " />
