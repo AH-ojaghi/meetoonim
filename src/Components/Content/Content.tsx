@@ -24,12 +24,14 @@ export default function Content() {
       })
       .catch((error) => console.error(error));
   }, []);
+
   //
   return (
     <div className="w-full md:w-[59%] lgs:w-[64%] md:px-3 lg:w-[46.6%] xl:w-[53%]">
       {data.map((card) => (
         <Card
-         id ={card.id}
+          data={data}
+          id={card.id}
           description={card.description}
           created_at={card.comments
             .map((item: any) => item.created_at)
