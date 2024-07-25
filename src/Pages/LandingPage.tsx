@@ -1,4 +1,3 @@
-import React from "react";
 import PageInformation from "../Components/PageInformation/PageInformation";
 import Content from "../Components/Content/Content";
 import AdvertisingCard from "../Components/AdvertisingCard/AdvertisingCard";

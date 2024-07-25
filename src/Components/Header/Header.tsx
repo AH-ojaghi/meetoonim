@@ -9,8 +9,8 @@ import Logo from "./Logo";
 
 export default function Header() {
   return (
-    <div className="fixed flex -top-1 z-20 w-full h-[4rem]  ">
-      <header className="flex justify-between md:px-9  px-2 items-center  bg-white w-full xl:px-[9rem]">
+    <div className="fixed flex -top-1 z-20 w-full h-[4rem]   ">
+      <header className="flex justify-between md:px-9 px-2 items-center  bg-white w-full xl:px-[9rem] ">
         <div>
           <div className="flex gap-3 items-center ">
           <Logo/>

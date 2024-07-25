@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import Comment from "./Comment";
 
+
+
 export default function Content() {
   const [data, setData] = useState<any[]>([]);
 
@@ -13,6 +15,7 @@ export default function Content() {
       "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbWVldG9vbmltLmNvbS9hcGkvdjEvdXNlcnMvbG9naW4iLCJpYXQiOjE3MjEyMTU4MjcsImV4cCI6MTcyNjAxNTgyNywibmJmIjoxNzIxMjE1ODI3LCJqdGkiOiJpN3pPRlRXUnZUN2xkV2hNIiwic3ViIjoiMjE4OTIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.HQtTBA6rBRSM_IwglUvM6JGdFF4VQrAuyRkcvWa7d5I"
     );
 
+    // get Data
     fetch("https://meetoonim.com/api/v1/posts/?page=1", {
       method: "GET",
       headers: myHeaders,
@@ -24,6 +27,7 @@ export default function Content() {
       })
       .catch((error) => console.error(error));
   }, []);
+  //
   return (
     <div className="w-full md:w-[59%] lgs:w-[64%] md:px-3 lg:w-[46.6%] xl:w-[53%]">
       {data.map((card) => (
@@ -56,10 +60,8 @@ export default function Content() {
             id_user={card.user.id}
           />
         </div>
+
       ))}
     </div>
   );
 }
-
-
-
