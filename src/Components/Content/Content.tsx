@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
-
-
+import Comment from "./Comment";
 
 export default function Content() {
   const [data, setData] = useState<any[]>([]);
-
 
   useEffect(() => {
     const myHeaders = new Headers();
@@ -29,69 +27,39 @@ export default function Content() {
   return (
     <div className="w-full md:w-[59%] lgs:w-[64%] md:px-3 lg:w-[46.6%] xl:w-[53%]">
       {data.map((card) => (
-        <Card
-          description={card.description}
-          created_at={card.comments.map((item:any) => item.created_at).join(", ")}
-          f_name={card.user.f_name}
-          l_name={card.user.l_name}
-          open_to_image={card.user.open_to_image}
-          thumbnail={card.media.map((item:any)=>item.thumbnail).join(",")}
-          comments_count={card.comments_count}
-          likes_count={card.likes_count}
-          comment={card.comments.map((item:any)=>item.comment)}
-          likes_countComments ={card.comments.map((item:any)=>item.likes_count)}
-          open_to_imageComments= {card.comments.map((item:any)=>item.user.open_to_image)}
-          id_user={card.user.id}
-          id_comments= {card.comments.map((item:any)=>item.user.id)}
-        />
+        <div className="bg-white mb-5  md:rounded-xl">
+          <Card
+            thumbnail={card.media.map((item:any)=>item.thumbnail).join(",")}
+            description={card.description}
+            open_to_image={card.user.open_to_image}
+            comments_count={card.comments_count}
+            f_name={card.user.f_name}
+            created_at={card.comments
+              .map((item: any) => item.created_at)
+              .join(", ")}
+            l_name={card.user.l_name}
+            />
+          <Comment
+            comment={card.comments.map((item: any) => item.comment)}
+            likes_countComments={card.comments.map(
+              (item: any) => item.likes_count
+            )}
+            created_at={card.comments
+              .map((item: any) => item.created_at)
+              .join(", ")}
+            f_name={card.user.f_name}
+            l_name={card.user.l_name}
+            open_to_imageComments={card.comments.map(
+              (item: any) => item.user.open_to_image
+            )}
+            id_comments={card.comments.map((item: any) => item.user.id)}
+            id_user={card.user.id}
+          />
+        </div>
       ))}
     </div>
   );
 }
 
-{/* <Card
-  logo="/vite.svg"
-  companyName="کارگزاری مفید"
-  time="11 ماه پیش"
-  postText="پیشرفت مداوم را با کارگزاری مفید تجربه کنید."
-  actions={cardItems}
-/>
-<Card
-  logo="/vite.svg"
-  companyName="کارگزاری مفید"
-  time="11 ماه پیش"
-  postText="پیشرفت مداوم را با کارگزاری مفید تجربه کنید."
-  actions={cardItems}
-/>
-<Card
-  logo="/digiKala.png"
-  companyName="دیجی کالا"
-  time="7 ماه پیش"
-  postText="پیشرفت مداوم را با دیجی کالا تجربه کنید."
-  image="/akhenaten.jpg"
-  commentsCount="3 نظر"
-  actions={cardItems}
->
-  <Comment
-    logo="/vite.svg"
-    username="علی کاظمی"
-    time="6 ماه پیش"
-    text="خیلی هم عالی"
-  />
-</Card>
-<Card
-  logo="/digiKala.png"
-  companyName="دیجی کالا"
-  time="7 ماه پیش"
-  postText="پیشرفت مداوم را با دیجی کالا تجربه کنید."
-  image="/akhenaten.jpg"
-  commentsCount="3 نظر"
-  actions={cardItems}
->
-  <Comment
-    logo="/vite.svg"
-    username="علی کاظمی"
-    time="6 ماه پیش"
-    text="خیلی هم عالی"
-  />
-</Card> */}
+
+
