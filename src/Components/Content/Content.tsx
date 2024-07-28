@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import Card from "./Card/Card";
+
+import Card from "./Card";
+import Comment from "./Comment";
+
+
+
 
 export default function Content() {
   const [data, setData] = useState<any[]>([]);
@@ -24,25 +29,43 @@ export default function Content() {
       })
       .catch((error) => console.error(error));
   }, []);
-
   //
   return (
     <div className="w-full md:w-[59%] lgs:w-[64%] md:px-3 lg:w-[46.6%] xl:w-[53%]">
       {data.map((card) => (
-        <Card
-          data={data}
-          id={card.id}
-          description={card.description}
-          created_at={card.comments
-            .map((item: any) => item.created_at)
-            .join(", ")}
-          f_name={card.user.f_name}
-          l_name={card.user.l_name}
-          open_to_image={card.user.open_to_image}
-          thumbnail={card.media.map((item: any) => item.thumbnail).join(",")}
-          comments_count={card.comments_count}
-        />
+
+        <div className="bg-white mb-5  md:rounded-xl">
+          <Card
+            thumbnail={card.media.map((item:any)=>item.thumbnail).join(",")}
+            description={card.description}
+            open_to_image={card.user.open_to_image}
+            comments_count={card.comments_count}
+            f_name={card.user.f_name}
+            created_at={card.comments
+              .map((item: any) => item.created_at)
+              .join(", ")}
+            l_name={card.user.l_name}
+            />
+          <Comment
+            comment={card.comments.map((item: any) => item.comment)}
+            likes_countComments={card.comments.map(
+              (item: any) => item.likes_count
+            )}
+            created_at={card.comments
+              .map((item: any) => item.created_at)
+              .join(", ")}
+            f_name={card.user.f_name}
+            l_name={card.user.l_name}
+            open_to_imageComments={card.comments.map(
+              (item: any) => item.user.open_to_image
+            )}
+            id_comments={card.comments.map((item: any) => item.user.id)}
+            id_user={card.user.id}
+          />
+        </div>
+
       ))}
     </div>
   );
 }
+
