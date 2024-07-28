@@ -6,7 +6,7 @@ import { FaRegBookmark, FaRegHeart, FaRegCommentAlt } from "react-icons/fa";
 import { MdOutlineIosShare } from "react-icons/md";
 interface CardProps {
   id: number;
-  isLike:boolean;
+  isLike: boolean;
   description: string;
   created_at: string;
   f_name: string;
@@ -39,7 +39,7 @@ const cardItems = [
 
 const Card: React.FC<CardProps> = ({
   id,
-    data,
+  data,
   description,
   created_at,
   f_name,
@@ -74,7 +74,7 @@ const Card: React.FC<CardProps> = ({
       <div className="flex justify-around text-slate-60 py-2 text-[0.63rem] font-bold text-black/60 border-t">
         {cardItems.map((item, index) => (
           <div key={index}>
-            <Action img={item.img} text={item.label} id={id} data={data}  />
+            <Action img={item.img} text={item.label} id={id} data={data} />
           </div>
         ))}
       </div>
