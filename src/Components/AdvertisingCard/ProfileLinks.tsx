@@ -29,7 +29,7 @@ const AccountItems = [
 ];
 export default function ProfileLinks() {
   return (
-    <div className="flex-col w-full font-bold py-5 gap-[20.5px] text-slate-500  pr-7 border-b border-slate-200 flex">
+    <div className="flex-col w-full font-bold py-5 gap-[20.5px] text-slate-500  pr-7 border-b-2 border-slate-200 flex">
       {AccountItems.map((item, index) => (
         <div key={index} className="flex items-center gap-x-3">
           {item.icon}

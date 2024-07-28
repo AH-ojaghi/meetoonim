@@ -82,7 +82,7 @@ const Action: React.FC<ActionProps> = ({ img, text, id }) => {
         )}
         {text === "ذخیره" && (
           <div ref={activeIconRef} className="hidden">
-            <FcBookmark className="text-[20px]" />
+            <FcBookmark className="text-[20px] -mt-1" />
           </div>
         )}
       </div>
