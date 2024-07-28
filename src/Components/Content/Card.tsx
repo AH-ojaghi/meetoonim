@@ -14,7 +14,7 @@ function Action({ img, text }: { img: React.ReactNode; text: string }) {
   
   
   const HandelColor = () => {
-    //اینجا گفتیم اگر text  با کلمه بسندیدن  برابر باشه قرمز اگر نه مشکی
+ //  اینجا گفتیم اگر text  با کلمه بسندیدن  برابر باشه قرمز اگر نه مشکی
     const newColor = text === "بسندیدن" ? `${(<FcLike />)}` : "black";
     setColor((prevColor) =>
       prevColor === newColor ? `${(<FcLike />)}` : newColor
