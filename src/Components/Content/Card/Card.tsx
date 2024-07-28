@@ -50,7 +50,7 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const eachThumbnail = thumbnail ? thumbnail.split(",") : [];
   return (
-    <div className="mb-2 md:rounded-xl md:mb-4 bg-white border border-slate-200">
+    <div className=" md:rounded-xl bg-white ">
       <CardHeader
         f_name={f_name}
         l_name={l_name}
@@ -71,7 +71,7 @@ const Card: React.FC<CardProps> = ({
           </p>
         ) : null}
       </div>
-      <div className="flex justify-around text-slate-60 py-2 text-[0.63rem] font-bold text-black/60 border-t">
+      <div className="flex justify-around text-slate-60 py-2 text-[0.63rem] font-bold text-black/60 border-t-2">
         {cardItems.map((item, index) => (
           <div key={index}>
             <Action img={item.img} text={item.label} id={id} data={data} />

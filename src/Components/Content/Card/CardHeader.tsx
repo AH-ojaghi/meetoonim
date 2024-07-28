@@ -20,7 +20,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
     <div className="px-[17.3px] py-3 w-full flex justify-between">
       <div className="flex gap-3">
         <img
-          src={open_to_image ? `https://meetoonim.com/${open_to_image}` : "/"}
+          src={open_to_image ? `https://meetoonim.com/${open_to_image}` : "/profile.jpg"}
           alt={open_to_image || "user"}
           width="48px"
           className="rounded-full"

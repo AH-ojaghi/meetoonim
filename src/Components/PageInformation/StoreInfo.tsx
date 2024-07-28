@@ -26,7 +26,7 @@ export default function StoreInfo() {
           خودرو و...
         </p>
       </div>
-      <div className="text-[1.05rem] py-[9px]  border-t border-b text-slate-700 flex items-center justify-between border-slate-300 font-bold px-[12px]">
+      <div className="text-[1.05rem] py-[9px]  border-t-2 border-b-2 text-slate-700 flex items-center justify-between border-slate-200 font-bold px-[12px]">
         <p >دنبال کننده</p>
         <p className=" text-sky-500 font-normal">4</p>
       </div>
