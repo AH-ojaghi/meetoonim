@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import Card from "./Card";
+import Card from "./Card/Card";
 import Comment from "./Comment";
 
 
@@ -30,12 +30,14 @@ export default function Content() {
       .catch((error) => console.error(error));
   }, []);
   //
+  console.log(data)
   return (
     <div className="w-full md:w-[59%] lgs:w-[64%] md:px-3 lg:w-[46.6%] xl:w-[53%]">
       {data.map((card) => (
 
         <div className="bg-white mb-5  md:rounded-xl">
           <Card
+              id={card.id}
             thumbnail={card.media.map((item:any)=>item.thumbnail).join(",")}
             description={card.description}
             open_to_image={card.user.open_to_image}
