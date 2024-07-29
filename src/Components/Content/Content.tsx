@@ -26,7 +26,6 @@ export default function Content() {
       .catch((error) => console.error(error));
   }, []);
 
-  // Auxiliary function to calculate time
   const getRelativeTime = (dateString) => {
     const date = new Date(dateString);
     const now = new Date();
@@ -65,6 +64,7 @@ export default function Content() {
     const diffInYears = diffInMonths / 12;
     return `${Math.floor(diffInYears)} سال پیش`;
   };
+console.log(data[0]);
 
   return (
     <div className="w-full md:w-[59%] lgs:w-[64%] md:px-3 lg:w-[46.6%] xl:w-[53%]">
@@ -81,6 +81,7 @@ export default function Content() {
             }
             comments_count={card.comments_count}
             f_name={card.user.f_name}
+            l_name={card.user.l_name}
             created_at={getRelativeTime(card.created_at)}
           />
           <Comment
