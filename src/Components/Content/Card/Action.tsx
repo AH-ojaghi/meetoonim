@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FcLike, FcBookmark } from "react-icons/fc";
-
+import { FaRegCommentAlt } from "react-icons/fa";
+import { MdOutlineIosShare } from "react-icons/md";
+import { Link } from "react-router-dom";
 interface ActionProps {
   img: JSX.Element;
   text: string;
@@ -74,17 +76,20 @@ const Action: React.FC<ActionProps> = ({ img, text, id }) => {
       onClick={postActionHandler}
     >
       <div>
-        <div ref={actionIconRef}>{img}</div>
-        {text === "بسندیدن" && (
-          <div ref={activeIconRef} className="hidden">
-            <FcLike className="text-[20px] -mt-[2px]" />
-          </div>
-        )}
-        {text === "ذخیره" && (
-          <div ref={activeIconRef} className="hidden">
-            <FcBookmark className="text-[20px] -mt-1" />
-          </div>
-        )}
+        <Link to={text === "نظرات" ? `/posts/${id}` : ""}>
+          <div ref={actionIconRef}>{img}</div>
+
+          {text === "بسندیدن" && (
+            <div ref={activeIconRef} className="hidden">
+              <FcLike className="text-[20px] -mt-[2px]" />
+            </div>
+          )}
+          {text === "ذخیره" && (
+            <div ref={activeIconRef} className="hidden">
+              <FcBookmark className="text-[20px] -mt-1" />
+            </div>
+          )}
+        </Link>
       </div>
       <p className="font-bold">{text}</p>
     </div>

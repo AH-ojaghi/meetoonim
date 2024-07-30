@@ -64,7 +64,8 @@ export default function Content() {
     const diffInYears = diffInMonths / 12;
     return `${Math.floor(diffInYears)} سال پیش`;
   };
-console.log(data[0]);
+  //
+  //
 
   return (
     <div className="w-full md:w-[59%] lgs:w-[64%] md:px-3 lg:w-[46.6%] xl:w-[53%]">
@@ -85,6 +86,7 @@ console.log(data[0]);
             created_at={getRelativeTime(card.created_at)}
           />
           <Comment
+          comment_user_id = {card.comments.map((comment:number) => comment.user.id)}
             comment={card.comments.map((item: any) => item.comment)}
             likes_countComments={card.comments.map(
               (item: any) => item.likes_count

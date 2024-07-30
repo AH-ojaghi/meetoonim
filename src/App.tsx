@@ -1,18 +1,13 @@
-import LandingPage from "./Pages/LandingPage";
 import Header from "./Components/Header/Header";
-import BottomMenu from "./Components/BottomMenu/BottomMenu";
-import MobileAddMenu from "../src/Components/MobileAddMenu";
-// import Modal from "./Utils/Modal";
-
-
+import { useRoutes } from "react-router-dom";
+import routes from "./Utils/routes";
 export default function App() {
+  const route = useRoutes(routes);
   return (
     <>
       <Header />
-      <LandingPage />
-      <BottomMenu />
-      <MobileAddMenu />
-      {/* <Modal /> */}
+      {route}
+ 
     </>
   );
 }

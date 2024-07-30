@@ -14,9 +14,16 @@
   body {
     background: #f5f5f5;
     font-family: "Yekan", sans-serif;
-    -webkit-user-select: none; 
-    -ms-user-select: none; 
+    -webkit-user-select: none;
+    -ms-user-select: none;
     user-select: none;
+  }
+  .hidden_scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hidden_scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 

@@ -1,9 +1,12 @@
 import PageInformation from "../Components/PageInformation/PageInformation";
 import Content from "../Components/Content/Content";
 import AdvertisingCard from "../Components/AdvertisingCard/AdvertisingCard";
-
+import BottomMenu from "../Components/BottomMenu/BottomMenu";
+import MobileAddMenu from "../Components/MobileAddMenu";
+//
 export default function LandingPage() {
   return (
+    <>
     <div className=" flex justify-center mt-[4.8rem] md:mt-[5.4rem] lg:mx-[1rem]">
       <div className="flex justify-around w-full max-w-[78rem]">
         <PageInformation />
@@ -11,5 +14,8 @@ export default function LandingPage() {
         <AdvertisingCard />
       </div>
     </div>
+    <BottomMenu />
+    <MobileAddMenu />
+    </>
   );
 }

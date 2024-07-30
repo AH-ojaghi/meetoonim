@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
-import { FaRegHeart } from "react-icons/fa6";
 import { FcLike } from "react-icons/fc";
+import { PiHeartThin } from "react-icons/pi";
 import { TbPointFilled } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 
@@ -11,7 +11,7 @@ export default function Comment({
   created_at,
   f_name,
   l_name,
-
+  comment_user_id,
   open_to_imageComments,
   id_comments,
   id_user,
@@ -21,7 +21,7 @@ export default function Comment({
   created_at: string;
   f_name: string;
   l_name: string;
-
+  comment_user_id: array;
   open_to_imageComments: string;
   id_comments: string;
   id_user: string;
@@ -35,6 +35,7 @@ export default function Comment({
     setOpen(!open);
   };
   const MenuComment = [{ label: "حذف " }, { label: "ویرایش" }];
+
   return (
     <div className="md:w-full ">
       {comment && likes_countComments && created_at && f_name && l_name && (
@@ -57,7 +58,7 @@ export default function Comment({
               <div className="flex  flex-col ml-[17px] mr-3 w-full  justify-center">
                 <div className="flex w-full justify-between items-center">
                   <div className="flex">
-                    <p className="text-black/90 flex gap-1 text-[#444444] items-center text-xs justify-center">
+                    <p className="   flex gap-1 text-[#444444]/90 items-center text-xs justify-center">
                       {f_name}
                       <p>{l_name}</p>
                       <div>
@@ -78,51 +79,51 @@ export default function Comment({
                       {favoriteIndex ? (
                         <FcLike className="w-3" />
                       ) : (
-                        <FaRegHeart className="w-3" />
+                        <PiHeartThin className="w-3" />
                       )}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex">
-                  <p className="text-[15px]">{comment}</p>
+                  <p className="text-[15px] text-slate-700">{comment}</p>
                 </div>
               </div>
             </div>
           </div>
-          {id_comments.includes(id_user) ? (
+          {id_comments && (
             <div className="flex">
-              <div className="flex text-[#9797bd] text-xs w-10/12 xs:w-full   ">
+              <div className="flex text-[#9797bd] text-xs w-10/12 xs:w-full mb-2  ">
                 <button className="mr-[74px] h-fit ">پاسخ</button>
               </div>
-              <div className="dropdown relative  inline-block">
-                <button
-                  onClick={() => {
-                    toggleDropdownnn();
-                  }}
-                  className="dropbtn rounded focus:outline-none text-start ml-[41.85px] text-gray-500 text-xl"
-                >
-                  <BsThreeDots />
-                </button>
-                <div
-                  id="myDropdown"
-                  className={`dropdown z-10 absolute  mt-2 left-0 bg-white border border-gray-200 rounded shadow-lg transition-all duration-500 ${
-                    open ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
-                  } overflow-hidden`}
-                >
-                  {MenuComment.map((item, index) => (
-                    <a
-                      key={index}
-                      className="block px-4 py-2 text-black hover:bg-gray-200"
-                    >
-                      {item.label}
-                    </a>
-                  ))}
+              {comment_user_id == id_user && (
+                <div className="dropdown relative  inline-block">
+                  <button
+                    onClick={() => {
+                      toggleDropdownnn();
+                    }}
+                    className="dropbtn rounded focus:outline-none text-start ml-[41.85px] text-gray-500 text-xl"
+                  >
+                    <BsThreeDots />
+                  </button>
+                  <div
+                    id="myDropdown"
+                    className={`dropdown z-10 absolute  mt-2 left-0 bg-white border border-gray-200 rounded shadow-lg transition-all duration-500 ${
+                      open ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
+                    } overflow-hidden`}
+                  >
+                    {MenuComment.map((item, index) => (
+                      <a
+                        key={index}
+                        className="block px-4 py-2 text-black hover:bg-gray-200"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
-          ) : (
-            ""
           )}
         </>
       )}
