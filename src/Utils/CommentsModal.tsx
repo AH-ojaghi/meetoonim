@@ -14,9 +14,11 @@ import ActionsList from "../Components/Content/Card/ActionsList";
 //
 function CommentsModal() {
   const [data, setData] = useState<any[]>([]);
+  const [commentData, setCommentData] = useState<any[]>([]);
+  const [updateCommentData, setUpdateCommentData] = useState(true);
   const [commentValue, setCommentValue] = useState<any[]>();
   const postId = useParams();
-  // get data
+  // get all data
   useEffect(() => {
     const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -36,7 +38,28 @@ function CommentsModal() {
       })
       .catch((error) => console.error(error));
   }, []);
+  // get comment data
+  useEffect(() => {
+    const myHeaders = new Headers();
+    myHeaders.append(
+      "Authorization",
+      "Bearer Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbWVldG9vbmltLmNvbS9hcGkvdjEvdXNlcnMvbG9naW4iLCJpYXQiOjE3MjE2Mjg0MTIsImV4cCI6MTcyNjQyODQxMiwibmJmIjoxNzIxNjI4NDEyLCJqdGkiOiJYcnhjcjVYcHFaVWN4dzh6Iiwic3ViIjoiMjE4OTIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.xoGfmLwAp4rAdXmQ_sC5cvVhvzp4N3HSRzUEoztCP2Y"
+    );
 
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(`https://meetoonim.com/api/v1/posts/${postId.id}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => setCommentData(result.data))
+      .catch((error) => console.error(error));
+  }, [updateCommentData,postId]);
+  console.log(commentData);
+
+  //
   const [postData] = data.filter((item) => item.id == postId.id);
   const thumbnail = postData?.media
     .map((item: any) => item.thumbnail)
@@ -134,14 +157,22 @@ function CommentsModal() {
         redirect: "follow",
       };
 
-      fetch("https://meetoonim.com/api/v1/comments/89", requestOptions)
+      fetch(`https://meetoonim.com/api/v1/comments/${postId.id}`, requestOptions)
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.error(error));
-    }
-    // empty input comment
+      }
+      setUpdateCommentData(!updateCommentData);
+      // empty input comment
     setCommentValue("");
   };
+  //
+  //
+  //
+  //
+  //
+  //
+  
   return (
     <>
       <div className=" bg-black/40 w-full h-full  fixed inset-0 z-50 ">
@@ -215,7 +246,11 @@ function CommentsModal() {
           <div className="w-full my-3 flex justify-between px-[15px] text-[11px] text-gray-400  items-center">
             <div className="flex justify-center items-center gap-x-[2px]">
               <IoHeartCircle className="text-sky-400 text-xl" />
-              <p>{userComment}</p>
+              <p>
+                {userComment?.[0]}
+
+                {userComment?.length > 0 ? ` و ...` : ""}
+              </p>
             </div>
             <p>{postData?.comments_count} نظر</p>
           </div>
@@ -229,22 +264,23 @@ function CommentsModal() {
           </p>
           {/* Comments */}
           <div className="mb-16">
-            <Comment
-              comment={postData?.comments.map((item: any) => item.comment)}
-              likes_countComments={postData?.comments.map(
-                (item: any) => item.likes_count
-              )}
-              created_at={postData?.comments
-                .map((item: any) => item?.created_at)
-                .join(", ")}
-              f_name={postData?.user.f_name}
-              l_name={postData?.user.l_name}
-              open_to_imageComments={postData?.comments.map(
-                (item: any) => item?.user.open_to_image
-              )}
-              id_comments={postData?.comments.map((item: any) => item?.user.id)}
-              id_user={postData?.user.id}
-            />
+            {commentData?.comments?.map((item: any) => (
+              <Comment
+                comment={item?.comment}
+                likes_countComments={item?.likes_count}
+                created_at={item?.created_at}
+                f_name={item?.user.f_name}
+                l_name={item?.user.l_name}
+                open_to_imageComments={
+                  item?.user.open_to_image
+                    ? item?.user.open_to_image
+                    : item?.user.avatar
+                }
+                id_comments={item?.id}
+                comment_user_id={item?.user.id}
+                id_user={commentData.id}
+              />
+            ))}
           </div>
 
           {/* send comment */}

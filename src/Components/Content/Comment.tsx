@@ -17,7 +17,7 @@ export default function Comment({
   id_user,
 }: {
   comment: string;
-  likes_countComments: string;
+  likes_countComments: number;
   created_at: string;
   f_name: string;
   l_name: string;
@@ -28,17 +28,23 @@ export default function Comment({
 }) {
   const [open, setOpen] = useState(false);
   const [favoriteIndex, setFavoriteIndex] = useState<null | number>(null);
-  const toggleFavorite = (index: null) => {
-    setFavoriteIndex((prevIndex) => (prevIndex === index ? null : index));
+  const toggleFavorite = () => {
+    setFavoriteIndex(!favoriteIndex);
   };
   const toggleDropdownnn = () => {
     setOpen(!open);
   };
   const MenuComment = [{ label: "حذف " }, { label: "ویرایش" }];
-
+  //
+  //
+  //
+  //
+  //
+  //
+  //
   return (
     <div className="md:w-full ">
-      {comment && likes_countComments && created_at && f_name && l_name && (
+      {comment  && created_at && f_name && l_name && (
         <>
           <div className=" flex justify-center gap-x-[7.5px] mt-[19px] items-center">
             {open_to_imageComments ? (
@@ -69,14 +75,14 @@ export default function Comment({
                   </div>
 
                   <div
-                    onClick={() => toggleFavorite}
+                    onClick={toggleFavorite}
                     className="flex items-center gap-[6px]"
                   >
                     <p className="font-B text-[#9e9ec1]">
                       {likes_countComments}
                     </p>
                     <div>
-                      {favoriteIndex ? (
+                      {favoriteIndex || likes_countComments > 0 ? (
                         <FcLike className="w-3" />
                       ) : (
                         <PiHeartThin className="w-3" />

@@ -85,23 +85,25 @@ export default function Content() {
             l_name={card.user.l_name}
             created_at={getRelativeTime(card.created_at)}
           />
-          <Comment
-          comment_user_id = {card.comments.map((comment:number) => comment.user.id)}
-            comment={card.comments.map((item: any) => item.comment)}
-            likes_countComments={card.comments.map(
-              (item: any) => item.likes_count
-            )}
-            created_at={card.comments
-              .map((item: any) => item.created_at)
-              .join(", ")}
-            f_name={card.user.f_name}
-            l_name={card.user.l_name}
-            open_to_imageComments={card.comments.map(
-              (item: any) => item.user.open_to_image
-            )}
-            id_comments={card.comments.map((item: any) => item.user.id)}
-            id_user={card.user.id}
-          />
+            <Comment
+              comment_user_id={card.comments.map(
+                (comment: number) => comment.user.id
+              )}
+              comment={card.comments.map((item: any) => item.comment)}
+              likes_countComments={card.comments.map(
+                (item: any) => item.likes_count
+              )}
+              created_at={card.comments
+                .map((item: any) => item.created_at)
+                .join(", ")}
+              f_name={card.user.f_name}
+              l_name={card.user.l_name}
+              open_to_imageComments={card.comments.map(
+                (item: any) => item.user.open_to_image
+              )}
+              id_comments={card.comments.map((item: any) => item.user.id)}
+              id_user={card.user.id}
+            />
         </div>
       ))}
     </div>
