@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   likePostAsync,
+  likePost,
   savePostAsync,
   removeBookmarkAsync,
 } from "../../../Redux/postActionSlice";
@@ -19,46 +20,17 @@ const Action: React.FC<ActionProps> = ({ img, text, id }) => {
   const activeIconRef = useRef<HTMLDivElement>(null);
   const postAction = useSelector((state: any) => state.postAction);
   const dispatch = useDispatch();
+  //
 
   const postActionHandler = () => {
     if (text === "بسندیدن") {
-      const post = postAction.find((post: any) => post.id === id);
-      if (post && post.isLiked) {
-        dispatch({ type: "postAction/dislikePost", payload: { id } });
-      } else {
-        dispatch(likePostAsync(id));
-      }
-    } else if (text === "ذخیره") {
-      const post = postAction.find((post: any) => post.id === id);
-      if (post && post.isBookmarked) {
-        dispatch(removeBookmarkAsync(id));
-      } else {
-        dispatch(savePostAsync(id));
-      }
+      dispatch(likePostAsync(id));
+      dispatch(likePostAsync(id));
     }
+    console.log(postAction[0]);
   };
 
-  useEffect(() => {
-    const post = postAction.find((post: any) => post.id === id);
-    if (text === "بسندیدن") {
-      if (post && post.isLiked) {
-        actionIconRef.current?.classList.add("hidden");
-        activeIconRef.current?.classList.remove("hidden");
-      } else {
-        actionIconRef.current?.classList.remove("hidden");
-        activeIconRef.current?.classList.add("hidden");
-      }
-    } else if (text === "ذخیره") {
-      if (post && post.isBookmarked) {
-        actionIconRef.current?.classList.add("hidden");
-        activeIconRef.current?.classList.remove("hidden");
-      } else {
-        actionIconRef.current?.classList.remove("hidden");
-        activeIconRef.current?.classList.add("hidden");
-      }
-    }
-  }, [postAction, id, text]);
-
+  //
   return (
     <div
       className="grid gap-y-1 justify-items-center"
@@ -85,3 +57,30 @@ const Action: React.FC<ActionProps> = ({ img, text, id }) => {
 };
 
 export default Action;
+
+///////////////
+// const post = postAction.find((post: any) => post.id === id);
+// const postMessage = postAction.find((post: any) => post.id === id)?.message;
+
+//////////////
+// useEffect(() => {
+//   const post = postAction.find((post: any) => post.id === id);
+
+//   if (text === "بسندیدن") {
+//     if (post?.isLiked) {
+//       actionIconRef.current?.classList.add("hidden");
+//       activeIconRef.current?.classList.remove("hidden");
+//     } else {
+//       actionIconRef.current?.classList.remove("hidden");
+//       activeIconRef.current?.classList.add("hidden");
+//     }
+//   } else if (text === "ذخیره") {
+//     if (post?.isBookmarked) {
+//       actionIconRef.current?.classList.add("hidden");
+//       activeIconRef.current?.classList.remove("hidden");
+//     } else {
+//       actionIconRef.current?.classList.remove("hidden");
+//       activeIconRef.current?.classList.add("hidden");
+//     }
+//   }
+// }, [postAction, id, text]);
