@@ -4,13 +4,13 @@ import { IoCloseOutline } from "react-icons/io5";
 import { IoEarthSharp } from "react-icons/io5";
 import { GoDotFill } from "react-icons/go";
 import Slider from "./Slider";
-import Action from "../Components/Content/Card/Action";
-import Comment from "../Components/Content/Comment";
+import Action from "../components/Content/Card/Action";
+import Comment from "../components/Content/Comment";
 import { IoSendSharp } from "react-icons/io5";
 import { FaRegBookmark, FaRegHeart, FaRegCommentAlt } from "react-icons/fa";
 import { MdOutlineIosShare } from "react-icons/md";
 import { IoHeartCircle } from "react-icons/io5";
-import ActionsList from "../Components/Content/Card/ActionsList";
+import ActionsList from "../components/Content/Card/ActionsList";
 //
 function CommentsModal() {
   const [data, setData] = useState<any[]>([]);

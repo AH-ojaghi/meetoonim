@@ -1,0 +1,1 @@
+<div className={'text-[#DE0000] max-w-screen md:!w-1/2 md:!w-2/3'}></div>

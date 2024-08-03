@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Slider from "../../../Utils/Slider";
+import Slider from "../../../utils/Slider";
 import Action from "./Action";
 import CardHeader from "./CardHeader";
 import { FaRegBookmark, FaRegHeart, FaRegCommentAlt } from "react-icons/fa";

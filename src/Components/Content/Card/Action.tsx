@@ -7,7 +7,7 @@ import {
   likePost,
   savePostAsync,
   removeBookmarkAsync,
-} from "../../../Redux/postActionSlice";
+} from "../../../redux/postActionSlice";
 
 interface ActionProps {
   img: JSX.Element;

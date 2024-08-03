@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoIosBook } from "react-icons/io";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { MdOutlineAssignmentInd } from "react-icons/md";
-import Modal from "../../Utils/Modal";
+import Modal from "../../utils/Modal";
 
 const addMenuItems = [
   {

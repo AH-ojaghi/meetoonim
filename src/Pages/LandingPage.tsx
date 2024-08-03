@@ -1,8 +1,8 @@
-import PageInformation from "../Components/PageInformation/PageInformation";
-import Content from "../Components/Content/Content";
-import AdvertisingCard from "../Components/AdvertisingCard/AdvertisingCard";
-import BottomMenu from "../Components/BottomMenu/BottomMenu";
-import MobileAddMenu from "../Components/MobileAddMenu";
+import PageInformation from "../components/PageInformation/PageInformation";
+import Content from "../components/Content/Content";
+import AdvertisingCard from "../components/AdvertisingCard/AdvertisingCard";
+import BottomMenu from "../components/BottomMenu/BottomMenu";
+import MobileAddMenu from "../components/MobileAddMenu";
 //
 export default function LandingPage() {
   return (

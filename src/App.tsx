@@ -1,8 +1,8 @@
-import Header from "./Components/Header/Header";
+import Header from "./components/Header/Header";
 import { useRoutes } from "react-router-dom";
-import routes from "./Utils/routes";
+import routes from "./utils/routes";
 import { Provider } from "react-redux";
-import store from "./Redux/Store";
+import store from "./redux/Store";
 export default function App() {
   const route = useRoutes(routes);
   return (

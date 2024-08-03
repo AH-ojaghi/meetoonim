@@ -1,4 +1,4 @@
-import LandingPage from "../Pages/LandingPage";
+import LandingPage from "../pages/LandingPage";
 import { RouteObject } from "react-router-dom";
 import CommentsModal from "./CommentsModal";
 

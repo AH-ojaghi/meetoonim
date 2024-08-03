@@ -3,7 +3,6 @@ import { HiCamera } from "react-icons/hi2";
 import { AiFillPicture } from "react-icons/ai";
 import { IoCloseOutline } from "react-icons/io5";
 //modal
-
 function Modal() {
   return (
     <div className=" bg-black/40 w-full h-full fixed inset-0 z-50 ">
