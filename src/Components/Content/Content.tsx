@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react";
 import Card from "./Card/Card";
 import Comment from "./Comment";
+import axios from "axios";
 
 export default function Content() {
   const [data, setData] = useState<any[]>([]);
+  //
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "https://meetoonim.com/api/v1/posts/?page=1",
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization:
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbWVldG9vbmltLmNvbS9hcGkvdjEvdXNlcnMvbG9naW4iLCJpYXQiOjE3MjEyMTU4MjcsImV4cCI6MTcyNjAxNTgyNywibmJmIjoxNzIxMjE1ODI3LCJqdGkiOiJpN3pPRlRXUnZUN2xkV2hNIiwic3ViIjoiMjE4OTIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.HQtTBA6rBRSM_IwglUvM6JGdFF4VQrAuyRkcvWa7d5I",
+          },
+        }
+      );
 
+      setData(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
-    myHeaders.append(
-      "Authorization",
-      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbWVldG9vbmltLmNvbS9hcGkvdjEvdXNlcnMvbG9naW4iLCJpYXQiOjE3MjEyMTU4MjcsImV4cCI6MTcyNjAxNTgyNywibmJmIjoxNzIxMjE1ODI3LCJqdGkiOiJpN3pPRlRXUnZUN2xkV2hNIiwic3ViIjoiMjE4OTIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.HQtTBA6rBRSM_IwglUvM6JGdFF4VQrAuyRkcvWa7d5I"
-    );
-
-    // get Data
-    fetch("https://meetoonim.com/api/v1/posts/?page=1", {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        setData(result.data);
-      })
-      .catch((error) => console.error(error));
+    fetchData();
   }, []);
 
   const getRelativeTime = (dateString) => {
@@ -31,19 +33,26 @@ export default function Content() {
     const now = new Date();
     const diffInMilliseconds = now - date;
 
-    const diffInSeconds = diffInMilliseconds / 1000;
+    const diffInSeconds =
+      diffInMilliseconds / 1000;
     if (diffInSeconds < 60) {
-      return `${Math.floor(diffInSeconds)} ثانیه پیش`;
+      return `${Math.floor(
+        diffInSeconds
+      )} ثانیه پیش`;
     }
 
     const diffInMinutes = diffInSeconds / 60;
     if (diffInMinutes < 60) {
-      return `${Math.floor(diffInMinutes)} دقیقه پیش`;
+      return `${Math.floor(
+        diffInMinutes
+      )} دقیقه پیش`;
     }
 
     const diffInHours = diffInMinutes / 60;
     if (diffInHours < 24) {
-      return `${Math.floor(diffInHours)} ساعت پیش`;
+      return `${Math.floor(
+        diffInHours
+      )} ساعت پیش`;
     }
 
     const diffInDays = diffInHours / 24;
@@ -53,12 +62,16 @@ export default function Content() {
 
     const diffInWeeks = diffInDays / 7;
     if (diffInWeeks < 4) {
-      return `${Math.floor(diffInWeeks)} هفته پیش`;
+      return `${Math.floor(
+        diffInWeeks
+      )} هفته پیش`;
     }
 
     const diffInMonths = diffInDays / 30;
     if (diffInMonths < 12) {
-      return `${Math.floor(diffInMonths)} ماه پیش`;
+      return `${Math.floor(
+        diffInMonths
+      )} ماه پیش`;
     }
 
     const diffInYears = diffInMonths / 12;
@@ -70,10 +83,15 @@ export default function Content() {
   return (
     <div className="w-full md:w-[59%] lgs:w-[64%] md:px-3 lg:w-[46.6%] xl:w-[53%]">
       {data.map((card) => (
-        <div key={card.id} className="bg-white mb-5 md:rounded-xl border-2">
+        <div
+          key={card.id}
+          className="bg-white mb-5 md:rounded-xl border-2"
+        >
           <Card
             id={card.id}
-            thumbnail={card.media.map((item: any) => item.thumbnail).join(",")}
+            thumbnail={card.media
+              .map((item: any) => item.thumbnail)
+              .join(",")}
             description={card.description}
             open_to_image={
               card.user.open_to_image
@@ -83,27 +101,34 @@ export default function Content() {
             comments_count={card.comments_count}
             f_name={card.user.f_name}
             l_name={card.user.l_name}
-            created_at={getRelativeTime(card.created_at)}
+            created_at={getRelativeTime(
+              card.created_at
+            )}
           />
-            <Comment
-              comment_user_id={card.comments.map(
-                (comment: number) => comment.user.id
-              )}
-              comment={card.comments.map((item: any) => item.comment)}
-              likes_countComments={card.comments.map(
-                (item: any) => item.likes_count
-              )}
-              created_at={card.comments
-                .map((item: any) => item.created_at)
-                .join(", ")}
-              f_name={card.user.f_name}
-              l_name={card.user.l_name}
-              open_to_imageComments={card.comments.map(
-                (item: any) => item.user.open_to_image
-              )}
-              id_comments={card.comments.map((item: any) => item.user.id)}
-              id_user={card.user.id}
-            />
+          <Comment
+            comment_user_id={card.comments.map(
+              (comment: number) => comment.user.id
+            )}
+            comment={card.comments.map(
+              (item: any) => item.comment
+            )}
+            likes_countComments={card.comments.map(
+              (item: any) => item.likes_count
+            )}
+            created_at={card.comments
+              .map((item: any) => item.created_at)
+              .join(", ")}
+            f_name={card.user.f_name}
+            l_name={card.user.l_name}
+            open_to_imageComments={card.comments.map(
+              (item: any) =>
+                item.user.open_to_image
+            )}
+            id_comments={card.comments.map(
+              (item: any) => item.user.id
+            )}
+            id_user={card.user.id}
+          />
         </div>
       ))}
     </div>

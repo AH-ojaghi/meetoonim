@@ -9,6 +9,6 @@ export interface DefaultStates {
 
 export type DefaultResponse = {
     status: number;
-    data: any;
+    data:any;
 }
 

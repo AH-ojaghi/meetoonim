@@ -1,7 +1,7 @@
 import { API_BASE_URL, API_CONFIG } from "./connectionConfig";
 import Auth from "./savedData/auth";
 import toast from "react-hot-toast";
-import { toastError } from "utils/funcions";
+import { toastError } from "../utils/funcions";
 import axios, { AxiosResponse } from "axios";
 
 export type requestOptionsType = {

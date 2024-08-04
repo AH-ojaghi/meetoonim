@@ -1,30 +1,18 @@
-import modalReducer from "redux/components/modalSlice";
-import tabsReducer from "redux/components/tabsSlice";
-import routeSlice from "redux/tools/routeSlice";
-import { configureStore } from '@reduxjs/toolkit';
-import thunk from "redux-thunk";
-import cropSlice from "redux/tools/cropSlice";
-import progressSlice from "./tools/progressSlice";
-import productsSlice from "redux/dashboard/products/productsSlice";
-import productPageSlice from "./dashboard/productPage/productPageSlice";
-import mediaViewSlice from "./tools/viewMediaSlice";
-
+import { configureStore } from "@reduxjs/toolkit";
+import postActionSlice from "./dashboard/postActionSlice";
+import contentSlice from "./dashboard/content/contentSlice";
+//
 const rootReducer = {
-    modal: modalReducer,
-    tabs: tabsReducer,
-    route: routeSlice,
-    adminProducts: productsSlice,
-    productPage: productPageSlice,
-    crop: cropSlice,
-    mediaView: mediaViewSlice,
-    progress: progressSlice,
+  postAction: postActionSlice,
+  contentAction: contentSlice,
 };
-
+//
 const store = configureStore({
-    reducer: rootReducer,
-    middleware: [thunk]
+  reducer: rootReducer,
 });
-
-export type RootState = ReturnType<typeof store.getState>;
+//
+export type RootState = ReturnType<
+  typeof store.getState
+>;
 export type AppDispatch = typeof store.dispatch;
 export default store;

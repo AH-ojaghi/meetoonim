@@ -1,51 +1,38 @@
+import React from "react";
 import { IPath } from "../types";
-import * as React from "react";
-import { getAll as getAllProducts } from "../../redux/dashboard/products/productsAction";
-import { getProductById } from "../../redux/dashboard/productPage/productPageAction";
-import Products from "../../pages/front/products";
-import ProductPageModal from "../../pages/front/productPage";
-// import guest from "../../middlewares/guest";
 import createRoutes from "./baseRoutes";
-
+import CommentsModal from "../CommentsModal";
+import LandingPage from "../../pages/LandingPage";
+//
 export default class Routes {
-  static home: IPath = {
+  static LandingPage: IPath = {
     path: "/",
-    name: "home",
-    middleware: [
-      /*guest*/
-    ],
-    preLoadingMethod: [{ action: getAllProducts }],
+    name: "LandingPage",
+    middleware: [],
+    preLoadingMethod: [],
   };
-  static products: IPath = {
-    path: "/products",
-    name: "products",
-    middleware: [
-      /*guest*/
-    ],
-    preLoadingMethod: [{ action: getAllProducts }],
-  };
-  static productPage = (id?: number): IPath => {
+  static CommentsModal = (id?: number): IPath => {
+    console.log('ghfhgvg');
+    
     return {
-      path: `${this.products.path}/${id || ":id"}`,
-      name: "productPage",
+      path: `/posts/${id || ":id"}`,
+      name: "CommentsModal",
       middleware: [],
-      preLoadingMethod: [{ action: getProductById, values: ["id"] }],
+      preLoadingMethod: [],
     };
+    // path : '/post/:id'
   };
 }
-export const indexRoutes = (): React.ReactElement[] =>
-  createRoutes([
-    {
-      path: Routes.products,
-      component: <Products />,
-    },
-    {
-      path: Routes.home,
-      component: <Products />,
-    },
-    {
-      path: Routes.productPage(),
-      component: <ProductPageModal />,
-      children: [],
-    },
-  ]);
+//
+export const indexRoutes =
+  (): React.ReactElement[] =>
+    createRoutes([
+      {
+        path: Routes.LandingPage,
+        component: <LandingPage />,
+      },
+      {
+        path: Routes.CommentsModal(),
+        component: <CommentsModal />,
+      },
+    ]);

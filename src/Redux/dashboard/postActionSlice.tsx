@@ -1,4 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+} from "@reduxjs/toolkit";
 
 const myHeaders = new Headers();
 myHeaders.append(
@@ -22,7 +25,10 @@ export const likePostAsync = createAsyncThunk(
           method: "PUT",
         }
       );
-      if (!response.ok) throw new Error("Network response was not ok");
+      if (!response.ok)
+        throw new Error(
+          "Network response was not ok"
+        );
       const result = await response.json();
       return { id, message: result.message };
     } catch (error) {
@@ -33,30 +39,38 @@ export const likePostAsync = createAsyncThunk(
 
 const postActionSlice = createSlice({
   name: "postAction",
-  initialState: [{ id: null, likes: 0, isLike: false }],
+  initialState: [
+    { id: null, likes: 0, isLike: false },
+  ],
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(likePostAsync.fulfilled, (state, action) => {
-        const [post] = state;
-        post.id = action.payload.id;
-        if (post.isLike) post.likes += 1;
-        if (!post.isLike && post.likes > 0) post.likes -= 1;
-        post.isLike = !post.isLike;
+      .addCase(
+        likePostAsync.fulfilled,
+        (state, action) => {
+          const [post] = state;
+          post.id = action.payload.id;
+          if (post.isLike) post.likes += 1;
+          if (!post.isLike && post.likes > 0)
+            post.likes -= 1;
+          post.isLike = !post.isLike;
 
-        // const post = state.find((post) => post.id === action.payload.id);
-        // if (post) {
-        //   post.likes += 1;
-        //   post.isLiked = true;
-        //   post.message = action.payload.message;
-        // } else {
-        //   state.push({ id: action.payload.id, likes: 1, isLiked: true, message: action.payload.message });
-        // }
-      })
-      .addCase(likePostAsync.pending, (state, action) => {
-        console.log('Loading ...');
-        
-      });
+          // const post = state.find((post) => post.id === action.payload.id);
+          // if (post) {
+          //   post.likes += 1;
+          //   post.isLiked = true;
+          //   post.message = action.payload.message;
+          // } else {
+          //   state.push({ id: action.payload.id, likes: 1, isLiked: true, message: action.payload.message });
+          // }
+        }
+      )
+      .addCase(
+        likePostAsync.pending,
+        (state, action) => {
+          console.log("Loading ...");
+        }
+      );
   },
 });
 

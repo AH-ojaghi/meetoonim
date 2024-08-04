@@ -1,5 +1,5 @@
-import {openModal} from "redux/components/modalSlice";
-import store from "redux/store";
+import {openModal} from "../redux/components/modalSlice";
+import store from "../redux/store";
 import toast from 'react-hot-toast';
 import {IPath, LaravelValidationErrorType} from "./types";
 import React from "react";
