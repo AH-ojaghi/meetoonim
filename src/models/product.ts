@@ -10,7 +10,7 @@ interface ProductInterface {
     quantity: number;
     category_id: number;
     category: Category;
-    media: Media[];
+    media?: Media[];
     cover?: Media;
 }
 
@@ -24,7 +24,7 @@ class Product {
     quantity: number;
     categoryId: number;
     category: Category;
-    media: Media[];
+    media?: Media[];
     cover?: Media;
 
     constructor(data: ProductInterface) {

@@ -9,9 +9,9 @@ interface State extends DefaultStates {
 }
 
 const initialState: State = {
-  id: null,
+  id: 0,
   likes: 0,
-  isLike: false,
+  isLike: true,
 };
 
 //
@@ -24,15 +24,14 @@ const postSLice = createSlice({
       .addCase(
         likePostAsync.fulfilled,
         (state, action) => {
-          const response = action.payload; // before : const [post] = state
-          state.isLike = !state.isLike;
-          if (response.isLike)
-            response.likes += 1;
-          if (
-            !response.isLike &&
-            response.likes > 0
-          )
-            response.likes -= 1;
+
+          state.isLike=null;
+          if (action.payload.status === 200)
+            state.isLike = true;
+          else state.isLike = false;
+          if (state.isLike) state.likes += 1;
+          if (!state.isLike && state.likes > 0)
+            state.likes -= 1;
         }
       )
       .addCase(

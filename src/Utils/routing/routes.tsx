@@ -3,22 +3,26 @@ import { IPath } from "../types";
 import createRoutes from "./baseRoutes";
 import CommentsModal from "../CommentsModal";
 import LandingPage from "../../pages/LandingPage";
+import { getPostContent } from "../../Redux/dashboard/content/contentAction";
 //
 export default class Routes {
   static LandingPage: IPath = {
     path: "/",
     name: "LandingPage",
     middleware: [],
-    preLoadingMethod: [],
+    preLoadingMethod: [{action: getPostContent}],
   };
   static CommentsModal = (id?: number): IPath => {
-    console.log('ghfhgvg');
     
     return {
       path: `/posts/${id || ":id"}`,
       name: "CommentsModal",
       middleware: [],
-      preLoadingMethod: [],
+      preLoadingMethod: [
+        {
+          action: getPostContent
+        }
+      ],
     };
     // path : '/post/:id'
   };

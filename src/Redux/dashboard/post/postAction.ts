@@ -19,7 +19,8 @@ export const likePostAsync = createAsyncThunk(
       ) {
         return {
           status: response.status,
-          data: response.data.data,
+          data: response.data,
+          id,
         };
       } else if (response.status === 422) {
         console.log("response.data");
@@ -29,12 +30,14 @@ export const likePostAsync = createAsyncThunk(
         return {
           status: response.status,
           data: errors,
+          id,
         };
       } else {
         toastError();
         return {
           status: response.status,
           data: null,
+          id: null,
         };
       }
     } catch (e) {
@@ -42,6 +45,7 @@ export const likePostAsync = createAsyncThunk(
       return {
         status: 500,
         data: null,
+        id,
       };
     }
   }

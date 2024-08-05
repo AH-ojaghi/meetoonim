@@ -1,13 +1,20 @@
-import React, { useEffect, useRef } from "react";
-import { FcLike, FcBookmark } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useRef } from "react";
+import {
+  FcLike,
+  FcBookmark,
+} from "react-icons/fc";
+import {
+  useDispatch,
+  useSelector,
+} from "react-redux";
 import { Link } from "react-router-dom";
 import {
   likePostAsync,
   likePost,
   savePostAsync,
   removeBookmarkAsync,
-} from "../../../redux/dashboard/postActionSlice";
+} from "../../../Redux/dashboard/post/postAction";
+import { useAppSelector } from "../../../Redux/hooks";
 
 interface ActionProps {
   img: JSX.Element;
@@ -15,19 +22,26 @@ interface ActionProps {
   id: number;
 }
 
-const Action: React.FC<ActionProps> = ({ img, text, id }) => {
-  const actionIconRef = useRef<HTMLDivElement>(null);
-  const activeIconRef = useRef<HTMLDivElement>(null);
-  const postAction = useSelector((state: any) => state.postAction);
+const Action: React.FC<ActionProps> = ({
+  img,
+  text,
+  id,
+}) => {
+  const actionIconRef =
+    useRef<HTMLDivElement>(null);
+  const activeIconRef =
+    useRef<HTMLDivElement>(null);
+  const postAction = useAppSelector(
+    (state: any) => state.postAction
+  );
   const dispatch = useDispatch();
   //
 
   const postActionHandler = () => {
     if (text === "بسندیدن") {
       dispatch(likePostAsync(id));
-      dispatch(likePostAsync(id));
     }
-    console.log(postAction[0]);
+    console.log('postAction',postAction);
   };
 
   //
@@ -37,15 +51,25 @@ const Action: React.FC<ActionProps> = ({ img, text, id }) => {
       onClick={postActionHandler}
     >
       <div>
-        <Link to={text === "نظرات" ? `/posts/${id}` : ""}>
+        <Link
+          to={
+            text === "نظرات" ? `/posts/${id}` : ""
+          }
+        >
           <div ref={actionIconRef}>{img}</div>
           {text === "بسندیدن" && (
-            <div ref={activeIconRef} className="hidden">
+            <div
+              ref={activeIconRef}
+              className="hidden"
+            >
               <FcLike className="text-[20px] -mt-[2px]" />
             </div>
           )}
           {text === "ذخیره" && (
-            <div ref={activeIconRef} className="hidden">
+            <div
+              ref={activeIconRef}
+              className="hidden"
+            >
               <FcBookmark className="text-[20px] -mt-1" />
             </div>
           )}

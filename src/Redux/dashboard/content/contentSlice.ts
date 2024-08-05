@@ -2,13 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import { DefaultStates } from "../../mainSlice";
 import { getPostContent } from "./contentAction";
 import store from "../../store";
+import Post from "../../../models/post";
 //
 interface State extends DefaultStates {
-  data: object;
+  loading: boolean;
+  data: Post[];
 }
 
 const initialState: State = {
-  data: {},
+  data: [],
   loading: false,
   validationErrors: null,
 };
@@ -22,40 +24,49 @@ const contentSlice = createSlice({
       .addCase(
         getPostContent.fulfilled,
         (state, action) => {
-          console.log(
-            state,
-            "state from --contentSlice:/fulfilled"
-          );
-          console.log(
-            action,
-            "action from --contentSlice:/fulfilled"
-          );
+          state.loading = false;
+          const response = action.payload.data;
+          const posts: Post[] = [];
+          for (
+            let i = 0;
+            i < response.data.length;
+            i++
+          ) {
+            const post = response.data[i];
+            posts.push(
+              new Post({
+                id: post.id,
+                title: post.title,
+                description: post.description,
+                likes_count: post.likes_count,
+                comments_count:
+                  post.comments_count,
+                views_count: post.views_count,
+                is_liked: post.is_liked,
+                is_bookmarked: post.is_bookmarked,
+                user: post.user,
+                media: post.media,
+                likes: post.likes,
+                comments: post.comments,
+                created_at: post.created_at,
+                updated_at: post.updated_at,
+              })
+            );
+          }
         }
       )
       .addCase(
         getPostContent.rejected,
         (state, action) => {
-          console.log(
-            state,
-            "state from --contentSlice:/rejected"
-          );
-          console.log(
-            action,
-            "actoin from --contentSlice:/rejected"
-          );
+          state.loading = false;
+          console.error("rejected request");
         }
       )
       .addCase(
         getPostContent.pending,
         (state, action) => {
-          console.log(
-            state,
-            "state from --contentSlice:/pending"
-          );
-          console.log(
-            action,
-            "action from --contentSlice:/pending"
-          );
+          state.loading = true;
+          console.info("Loading ...");
         }
       );
   },

@@ -57,8 +57,6 @@ function CommentsModal() {
       .then((result) => setCommentData(result.data))
       .catch((error) => console.error(error));
   }, [updateCommentData,postId]);
-  console.log(commentData);
-
   //
   const [postData] = data.filter((item) => item.id == postId.id);
   const thumbnail = postData?.media

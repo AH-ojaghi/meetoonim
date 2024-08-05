@@ -1,4 +1,5 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+// import { createAsyncThunk } from "@reduxjs/toolkit";
+// import {createAsyncThunk} from "@reduxjs/toolkit";
 import { DefaultResponse } from "../../mainSlice";
 import contentRequest from "../../../requests/contentRequest";
 import {
@@ -7,14 +8,16 @@ import {
 } from "../../../utils/funcions";
 import { AxiosResponse } from "axios";
 import { LaravelValidationErrorType } from "../../../utils/types";
+import {createAsyncThunk} from "@reduxjs/toolkit";
+// import { createAsyncThunk } from "@reduxjs/toolkit";
 //
 export const getPostContent = createAsyncThunk(
-  "postContent/getPostContent",
+  "postContent/getAll",
   async (): Promise<DefaultResponse> => {
     try {
       //hello world
-      const response: AxiosResponse =
-        await contentRequest.getPostContent();
+      
+      const response: AxiosResponse =await contentRequest.getPostContent();
       if (response.status === 200) {
         return {
           status: response.status,
