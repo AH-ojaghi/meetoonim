@@ -7,7 +7,7 @@ interface State extends DefaultStates {
   likes: number;
   isLike: boolean;
 }
-
+ 
 const initialState: State = {
   id: 0,
   likes: 0,
