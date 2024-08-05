@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import postActionSlice from "./dashboard/postActionSlice";
+import postActionSlice from "./dashboard/post/postSlice";
 import contentSlice from "./dashboard/content/contentSlice";
 //
 const rootReducer = {

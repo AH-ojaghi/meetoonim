@@ -1,5 +1,7 @@
-import store from "../../redux/store";
-import { setRoute } from "../../redux/tools/routeSlice";
+// import store from "../../redux/store";
+import store from "../../Redux/store"
+// import { setRoute } from "../../redux/tools/routeSlice";
+import { setRoute } from "../../Redux/tools/routeSlice";
 import { Route } from "react-router-dom";
 import * as React from "react";
 import { IPath, IRoute } from "../types";
