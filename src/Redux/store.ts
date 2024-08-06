@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import postActionSlice from "./dashboard/post/postSlice";
+import likePostActionSlice from "./dashboard/post/like/likePostSlice";
+import savePostslice from "./dashboard/post/save/savePostslice";
 import contentSlice from "./dashboard/content/contentSlice";
+import commentSlice from "./dashboard/comment/commentSlice";
 //
 const rootReducer = {
-  postAction: postActionSlice,
+  likePostAction: likePostActionSlice,
+  savePostAction: savePostslice,
   contentAction: contentSlice,
+  commentAction: commentSlice,
 };
 //
 const store = configureStore({

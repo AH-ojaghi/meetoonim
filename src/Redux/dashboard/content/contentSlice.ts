@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { DefaultStates } from "../../mainSlice";
 import { getPostContent } from "./contentAction";
-import store from "../../store";
 import Post from "../../../models/post";
 //
 interface State extends DefaultStates {
@@ -25,16 +24,18 @@ const contentSlice = createSlice({
         getPostContent.fulfilled,
         (state, action) => {
           state.loading = false;
-          const response = action.payload.data;
+          const data = action.payload;
+          const response = data.data;
           const posts: Post[] = [];
           for (
             let i = 0;
-            i < response.data.length;
+            i < response?.length;
             i++
           ) {
-            const post = response.data[i];
+            const post = response[i];
+            // console.log(posts ,'posts --BEFORE_PUSH');
             posts.push(
-              new Post({
+              {
                 id: post.id,
                 title: post.title,
                 description: post.description,
@@ -50,8 +51,10 @@ const contentSlice = createSlice({
                 comments: post.comments,
                 created_at: post.created_at,
                 updated_at: post.updated_at,
-              })
+              }
             );
+            // console.log(posts ,'posts --AFTER_PUSH');
+            state.data = posts;
           }
         }
       )

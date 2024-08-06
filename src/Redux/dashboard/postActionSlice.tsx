@@ -14,7 +14,7 @@
 //   redirect: "follow",
 // };
 
-// export const likePostAsync = createAsyncThunk(
+// export const likePostAsyncAction = createAsyncThunk(
 //   "postAction/likePost",
 //   async (id: number, { rejectWithValue }) => {
 //     try {
@@ -46,7 +46,7 @@
 //   extraReducers: (builder) => {
 //     builder
 //       .addCase(
-//         likePostAsync.fulfilled,
+//         likePostAsyncAction.fulfilled,
 //         (state, action) => {
 //           const [post] = state;
 //           post.id = action.payload.id;
@@ -66,7 +66,7 @@
 //         }
 //       )
 //       .addCase(
-//         likePostAsync.pending,
+//         likePostAsyncAction.pending,
 //         (state, action) => {
 //           console.log("Loading ...");
 //         }

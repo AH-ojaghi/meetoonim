@@ -7,8 +7,7 @@ export default function Content() {
   const { data, loading } = useAppSelector(
     (state: RootState) => state.contentAction
   );
-
-  const getRelativeTime = (dateString) => {
+    const getRelativeTime = (dateString) => {
     const date = new Date(dateString);
     const now = new Date();
     const diffInMilliseconds = now - date;
@@ -59,7 +58,6 @@ export default function Content() {
   };
   //
   //
-
   return (
     <div className="w-full md:w-[59%] lgs:w-[64%] md:px-3 lg:w-[46.6%] xl:w-[53%]">
       {!loading &&

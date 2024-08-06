@@ -8,13 +8,19 @@ export type     LaravelValidationErrorType = {
     }
 }
 
+console.log('console.log');
+
 export interface IPath {
     path: string;
     name: string;
     registered?: boolean;
     exact?: boolean;
     middleware?: React.FC<{children: ReactNode}>[];
-    preLoadingMethod?: {action: AsyncThunk<any, any, any>; values?: string[]}[];
+    preLoadingMethod?: {
+        action: AsyncThunk<any, any, any>;
+         values?: string[]
+        arguments?: {}
+        }[];
     isLoaded?: boolean;
 }
 
