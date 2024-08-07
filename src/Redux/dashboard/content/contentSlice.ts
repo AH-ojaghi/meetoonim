@@ -7,7 +7,7 @@ interface State extends DefaultStates {
   loading: boolean;
   data: Post[];
 }
-
+//
 const initialState: State = {
   data: [],
   loading: false,

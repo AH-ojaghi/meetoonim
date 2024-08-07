@@ -14,8 +14,8 @@ interface ActionProps {
 }
 
 const Action: React.FC<ActionProps> = ({ img, text, id }) => {
-  console.log('console.log', id);
-  
+  // console.log('console.log', id);
+
   const actionIconRef = useRef<HTMLDivElement>(null);
   const activeIconRef = useRef<HTMLDivElement>(null);
   const likePostActionSlice = useAppSelector(
@@ -61,7 +61,7 @@ const Action: React.FC<ActionProps> = ({ img, text, id }) => {
     }
   }, [isBookmarked, isLikePost, likePostActionSlice, text]);
   //
-  console.log("console.log", id);
+  // console.log("console.log", id);
   // console.log("console.log", Routes.CommentsModal(id).path);
 
   return (
@@ -70,8 +70,10 @@ const Action: React.FC<ActionProps> = ({ img, text, id }) => {
       onClick={postActionHandler}
     >
       <div>
-        <Link to={text === "نظرات" ? Routes.CommentsModal(id).path : ""}>
-
+        <Link
+          to={text === "نظرات" ? Routes.CommentsModal(id).path : ""}
+          onClick={() => console.log(id ,'console.log --ID --action.tsx')}
+        >
           <div ref={actionIconRef}>{img}</div>
           {text === "بسندیدن" && (
             <div ref={activeIconRef} className="hidden">

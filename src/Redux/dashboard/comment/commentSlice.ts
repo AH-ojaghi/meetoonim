@@ -28,9 +28,12 @@ const commentSlice = createSlice({
         console.info("Loading ...");
       })
       .addCase(getCommentsModalAction.fulfilled, (state, action) => {
+        console.log(action.payload);
+        
         state.loading = false;
-        const response = action.payload.data;
-        state.data = response.data;
+        const response = action.payload.data.data;
+        state.data = response;
+        state.id = action.payload.id
       })
       .addCase(getCommentsModalAction.rejected, (state, action) => {
         state.loading = false;

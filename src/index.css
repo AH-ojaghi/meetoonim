@@ -4,7 +4,7 @@
 
 @layer base {
   @font-face {
-    src: url("\Yekan.ttf");
+    src: url("./assets/fonts/yekan/woff/iranyekanwebbold\(fanum\).woff");
     font-family: "Yekan";
     font-style: normal;
   }

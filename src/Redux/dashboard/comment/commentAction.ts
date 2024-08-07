@@ -3,18 +3,32 @@ import { AxiosResponse } from "axios";
 import { toast422, toastError } from "../../../utils/funcions";
 import { LaravelValidationErrorType } from "../../../utils/types";
 import commentRequest from "../../../requests/commentRequest";
+// import { parseNumber } from "react-advanced-cropper";
+import { DefaultResponse } from "../../mainSlice";
 //get data
-console.log('console.log');
+//
+// export const getCommentsModalAction = createAsyncThunk(
+//   "commentsModal/getAll",
+//   async (data: { [key: string]: any }) => {
+//       // console.log("console.log", data);
+//  //
+//     try {
+//       const response: AxiosResponse = await commentRequest.authGet(
+//         // parseNumber(data.id)
+//       );
+interface ExtendedResponse extends DefaultResponse {
+  id: number;
+}
 
 export const getCommentsModalAction = createAsyncThunk(
-  "commentsModal/getAll",
-  async (data: { [key: string]: any }) => {
-      console.log("console.log", data);
-      //
+  "postContent/getAll",
+  //Promise<DefaultResponse >
+  async (id: number): Promise<ExtendedResponse> => {
+    console.log("console.log --ID --commentAction.tsx" ,id);
+    
     try {
-      const response: AxiosResponse = await commentRequest.authGet(
-        parseNumber(data.id)
-      );
+      //hello world
+      const response: AxiosResponse = await commentRequest.authGet(id);
       if (response.status === 200) {
         return {
           status: response.status,
@@ -22,7 +36,7 @@ export const getCommentsModalAction = createAsyncThunk(
           id,
         };
       } else if (response.status === 422) {
-        console.log("response.data");
+        // console.log("response.data");
         const errors = (await response.data) as LaravelValidationErrorType;
         toast422(errors);
         return {
@@ -35,7 +49,7 @@ export const getCommentsModalAction = createAsyncThunk(
         return {
           status: response.status,
           data: null,
-          id: null,
+          id,
         };
       }
     } catch (e) {
@@ -49,9 +63,6 @@ export const getCommentsModalAction = createAsyncThunk(
   }
 );
 
-function parseNumber(id: any): number {
-  throw new Error("Function not implemented.");
-}
 // post data
 // export const getCommentsModalAction = createAsyncThunk(
 //     "commentsModal/authGet",
