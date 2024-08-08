@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import Comment from "./Comment";
 
-
-
-
 export default function Content() {
   const [data, setData] = useState<any[]>([]);
 
@@ -17,7 +14,6 @@ export default function Content() {
       "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbWVldG9vbmltLmNvbS9hcGkvdjEvdXNlcnMvbG9naW4iLCJpYXQiOjE3MjEyMTU4MjcsImV4cCI6MTcyNjAxNTgyNywibmJmIjoxNzIxMjE1ODI3LCJqdGkiOiJpN3pPRlRXUnZUN2xkV2hNIiwic3ViIjoiMjE4OTIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.HQtTBA6rBRSM_IwglUvM6JGdFF4VQrAuyRkcvWa7d5I"
     );
 
-    // get Data
     fetch("https://meetoonim.com/api/v1/posts/?page=1", {
       method: "GET",
       headers: myHeaders,
@@ -33,10 +29,9 @@ export default function Content() {
   return (
     <div className="w-full md:w-[59%] lgs:w-[64%] md:px-3 lg:w-[46.6%] xl:w-[53%]">
       {data.map((card) => (
-
         <div className="bg-white mb-5  md:rounded-xl">
           <Card
-            thumbnail={card.media.map((item:any)=>item.thumbnail).join(",")}
+            thumbnail={card.media.map((item: any) => item.thumbnail).join(",")}
             description={card.description}
             open_to_image={card.user.open_to_image}
             comments_count={card.comments_count}
@@ -45,7 +40,7 @@ export default function Content() {
               .map((item: any) => item.created_at)
               .join(", ")}
             l_name={card.user.l_name}
-            />
+          />
           <Comment
             comment={card.comments.map((item: any) => item.comment)}
             likes_countComments={card.comments.map(
@@ -63,9 +58,7 @@ export default function Content() {
             id_user={card.user.id}
           />
         </div>
-
       ))}
     </div>
   );
 }
-

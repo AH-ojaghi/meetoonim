@@ -1,4 +1,3 @@
-import React from "react";
 import { LuSearch } from "react-icons/lu";
 import AddMenu from "./AddMenu";
 import SearchBar from "./SearchBar";

@@ -30,7 +30,7 @@ export default function AddMenu() {
     setIsOpenMenu(!isOpenMenu);
   };
 
-  const postModal = (e) => {
+  const postModal = (e:any) => {
     let addItems = e.currentTarget.childNodes[1].innerText;
     if (addItems === "بست") {
       setIsShowModal(true);

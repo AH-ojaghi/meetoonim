@@ -11,10 +11,8 @@ import { VscAccount } from "react-icons/vsc";
 function Action({ img, text }: { img: React.ReactNode; text: string }) {
   const [color, setColor] = useState("black");
 
-  
-  
   const HandelColor = () => {
- //  اینجا گفتیم اگر text  با کلمه بسندیدن  برابر باشه قرمز اگر نه مشکی
+    //  اینجا گفتیم اگر text  با کلمه بسندیدن  برابر باشه قرمز اگر نه مشکی
     const newColor = text === "بسندیدن" ? `${(<FcLike />)}` : "black";
     setColor((prevColor) =>
       prevColor === newColor ? `${(<FcLike />)}` : newColor
@@ -39,6 +37,93 @@ const cardItems = [
   { img: <FaRegBookmark className="text-[16px]" />, label: "ذخیره" },
 ];
 
+
+
+
+
+// useEffect(()=>{
+//   const dlam =()=>{
+//     if(cardItems.map((item)=>{
+//       item.label ==="بسندیدن"
+//     })){
+//       async function likePost() {
+     
+        
+//         try {
+//             const response = await fetch(`https://meetoonim.com/api/v1/posts/${id}/like`, {
+//                 method: 'PUT',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+                  
+//                 }
+//             });
+    
+//             if (!response.ok) {
+//                 throw new Error(`HTTP error! status: ${response.status}`);
+//             }
+    
+//             const data = await response.json();
+//             console.log('Post liked successfully:', data);
+//         } catch (error) {
+//             console.error('Error liking the post:', error);
+//         }
+//     }
+    
+//     likePost();
+    
+//     }
+      
+//   }
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function likePost() {
+  const url = 'https://meetoonim.com/api/v1/posts/96/like';
+  
+  try {
+      const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer YOUR_ACCESS_TOKEN' // در صورت نیاز به توکن دسترسی
+          }
+      });
+
+      if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Post liked successfully:', data);
+  } catch (error) {
+      console.error('Error liking the post:', error);
+  }
+}
+
+// Call the function
+likePost();
+
+
+
+
 const actionsList = [
   { name: "اشتراک گذاری" },
   { name: "بلاک کردن" },
@@ -53,25 +138,19 @@ export default function Card({
   l_name,
   open_to_image,
   comments_count,
-  created_at
- 
+  created_at,
 }: {
   description: string;
-  created_at:string
+  created_at: string;
   f_name: string;
   l_name: string;
   open_to_image: string;
   thumbnail: string;
   comments_count: string;
-
-  
-
-  
-
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [favoriteIndex, setFavoriteIndex] = useState<null | number>(null);
-  
+
   const toggleFavorite = (index: null) => {
     setFavoriteIndex((prevIndex) => (prevIndex === index ? null : index));
   };

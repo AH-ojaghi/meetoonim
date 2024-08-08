@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Slider from "../../../Utils/Slider";
 import Action from "./Action";
 import CardHeader from "./CardHeader";
