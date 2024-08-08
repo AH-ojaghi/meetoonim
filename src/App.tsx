@@ -8,6 +8,7 @@ import MobileAddMenu from "../src/Components/MobileAddMenu";
 export default function App() {
   return (
     <>
+    
       <Header />
       <LandingPage />
       <BottomMenu />
