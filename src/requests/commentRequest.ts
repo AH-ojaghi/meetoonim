@@ -1,11 +1,12 @@
+import { parseNumber } from "react-advanced-cropper";
 import API from "../services/api";
 import { AxiosResponse } from "axios";
 //
 class commentRequest {
   public static async authGet(id: number): Promise<AxiosResponse> {
-    console.log(id ,"REQUEST--");
-//  
+    console.log(id ,"--REQUEST ");
     return await API.authGet(`posts/${id}`, {
+      
       data: {},
       headers: {
         token:

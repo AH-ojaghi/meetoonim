@@ -5,9 +5,10 @@ import { LaravelValidationErrorType } from "../../../utils/types";
 import commentRequest from "../../../requests/commentRequest";
 // import { parseNumber } from "react-advanced-cropper";
 import { DefaultResponse } from "../../mainSlice";
+import { parseNumber } from "react-advanced-cropper";
 //get data
 //
-// export const getCommentsModalAction = createAsyncThunk(
+// export const getCommentsModalAction = createAsyncThunk(e
 //   "commentsModal/getAll",
 //   async (data: { [key: string]: any }) => {
 //       // console.log("console.log", data);
@@ -17,23 +18,26 @@ import { DefaultResponse } from "../../mainSlice";
 //         // parseNumber(data.id)
 //       );
 interface ExtendedResponse extends DefaultResponse {
-  id: number;
+  data:{id:string};
+  id: number
 }
 
 export const getCommentsModalAction = createAsyncThunk(
   "postContent/getAll",
   //Promise<DefaultResponse >
-  async (id: number): Promise<ExtendedResponse> => {
-    console.log("console.log --ID --commentAction.tsx" ,id);
+  async (data: { [key: string]: any }): Promise<ExtendedResponse> => {
+    console.log("console.log --ID --commentAction.tsx" ,parseNumber(data.id));
     
     try {
       //hello world
-      const response: AxiosResponse = await commentRequest.authGet(id);
+      const response: AxiosResponse = await commentRequest.authGet(parseNumber(data.id));
+      console.log("response: ", response)
+      console.log("data id: ", parseNumber(data.id))
       if (response.status === 200) {
         return {
           status: response.status,
           data: response.data,
-          id,
+          id:parseNumber(data.id)
         };
       } else if (response.status === 422) {
         // console.log("response.data");
@@ -42,14 +46,14 @@ export const getCommentsModalAction = createAsyncThunk(
         return {
           status: response.status,
           data: errors,
-          id,
+          id:parseNumber(data.id)
         };
       } else {
         toastError();
         return {
           status: response.status,
           data: null,
-          id,
+          id:parseNumber(data.id)
         };
       }
     } catch (e) {
@@ -57,7 +61,7 @@ export const getCommentsModalAction = createAsyncThunk(
       return {
         status: 500,
         data: null,
-        id,
+        id:parseNumber(data.id)
       };
     }
   }

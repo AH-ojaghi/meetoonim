@@ -16,7 +16,7 @@ export default class Routes {
   static CommentsModal = (id?: number): IPath => {
     console.log("console.log --ID -routes", id);
     return {
-      path: `posts/${id || ":id"}`,
+      path: `/posts/${id || ":id"}`,
       name: "commentsModal",
       middleware: [],
       preLoadingMethod: [{ action: getCommentsModalAction, values: ["id"] }],
@@ -31,10 +31,10 @@ export const indexRoutes = (): React.ReactElement[] =>
       component: <LandingPage />,
     },
   ]);
-export const modalRoutes = (): React.ReactElement[] => createRoutes ([
-  {
-    path: Routes.CommentsModal(),
-    component: <CommentsModal />,
-    
-  },
-])
+export const modalRoutes = (): React.ReactElement[] =>
+  createRoutes([
+    {
+      path: Routes.CommentsModal(),
+      component: <CommentsModal />,
+    },
+  ]);

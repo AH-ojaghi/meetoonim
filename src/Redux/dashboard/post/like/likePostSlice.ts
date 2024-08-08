@@ -36,6 +36,7 @@ const likePostActionSlice = createSlice({
           if (action.payload.status === 200)
             state.isLike = true;
           else state.isLike = false;
+          //
           if (state.isLike) state.likes += 1;
           if (!state.isLike && state.likes > 0)
             state.likes -= 1;

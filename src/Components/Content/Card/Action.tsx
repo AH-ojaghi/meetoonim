@@ -14,7 +14,7 @@ interface ActionProps {
 }
 
 const Action: React.FC<ActionProps> = ({ img, text, id }) => {
-  // console.log('console.log', id);
+  // console.log('console.log id: ', id);
 
   const actionIconRef = useRef<HTMLDivElement>(null);
   const activeIconRef = useRef<HTMLDivElement>(null);
@@ -72,7 +72,8 @@ const Action: React.FC<ActionProps> = ({ img, text, id }) => {
       <div>
         <Link
           to={text === "نظرات" ? Routes.CommentsModal(id).path : ""}
-          onClick={() => console.log(id ,'console.log --ID --action.tsx')}
+          state={Routes.CommentsModal(id).path}
+          onClick={() => console.log(Routes.CommentsModal(id).path,'console.log --ID --action.tsx')}
         >
           <div ref={actionIconRef}>{img}</div>
           {text === "بسندیدن" && (

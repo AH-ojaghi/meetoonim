@@ -12,7 +12,7 @@ interface State extends DefaultStates {
 const initialState: State = {
   id: 0,
   data: {},
-  loading: false,
+  loading: true,
   validationErrors: null,
 };
 //
@@ -25,18 +25,25 @@ const commentSlice = createSlice({
     builder
       .addCase(getCommentsModalAction.pending, (state, action) => {
         state.loading = true;
+        console.log(`loooooooooading`);
+        
         console.info("Loading ...");
       })
       .addCase(getCommentsModalAction.fulfilled, (state, action) => {
-        console.log(action.payload);
+        console.log(`fuuuuuuuuulfild`);
         
-        state.loading = false;
-        const response = action.payload.data.data;
+        console.log(action.payload, "cooments --Slice");
+
+        const response = action.payload?.data?.data;
         state.data = response;
-        state.id = action.payload.id
+        state.id = action.payload.id;
+        state.loading = false;
+
       })
       .addCase(getCommentsModalAction.rejected, (state, action) => {
         state.loading = false;
+        console.log('reeeeeeeeeeeeeeeeeeeeeejected');
+        
         console.error("Rejected request !");
       });
     //post data

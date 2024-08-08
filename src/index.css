@@ -4,7 +4,7 @@
 
 @layer base {
   @font-face {
-    src: url("./assets/fonts/yekan/woff/iranyekanwebbold\(fanum\).woff");
+    src: url("/src/assets/fonts/yekan/woff/iranyekanwebregular\(fanum\).woff");
     font-family: "Yekan";
     font-style: normal;
   }
@@ -38,7 +38,7 @@ html {
 html::-webkit-scrollbar {
   display: none;
 }
-@font-face {
+/* @font-face {
   font-family: B;
   src: url("../public/BByakan.ttf") format("truetype");
-}
+} */

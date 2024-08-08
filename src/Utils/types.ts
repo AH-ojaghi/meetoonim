@@ -1,26 +1,30 @@
 import React, {ReactNode} from "react";
 import {AsyncThunk, AsyncThunkAction} from "@reduxjs/toolkit";
 
-export type     LaravelValidationErrorType = {
+export type LaravelValidationErrorType = {
     message: string;
     errors: {
         [key: string]: string[];
     }
 }
 
-console.log('console.log');
-
 export interface IPath {
     path: string;
     name: string;
+
     registered?: boolean;
     exact?: boolean;
-    middleware?: React.FC<{children: ReactNode}>[];
+    middleware?: React.FC<{ children: ReactNode }>[];
     preLoadingMethod?: {
         action: AsyncThunk<any, any, any>;
-         values?: string[]
-        arguments?: {}
-        }[];
+        values?: string[],
+        arguments?: {},
+    }[];
+    usingCachePreloadingMethod?: {
+        action: AsyncThunk<any, any, any>;
+        values?: string[],
+        arguments?: {},
+    }[];
     isLoaded?: boolean;
 }
 

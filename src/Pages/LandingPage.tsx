@@ -9,6 +9,7 @@ export default function LandingPage() {
     <>
     <div className=" flex justify-center mt-[4.8rem] md:mt-[5.4rem] lg:mx-[1rem]">
       <div className="flex justify-around w-full max-w-[78rem]">
+        
         <PageInformation />
         <Content />
         <AdvertisingCard />

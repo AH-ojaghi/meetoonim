@@ -12,7 +12,6 @@ const ImageCropper: React.FC<{ file?: File }> = ({file}) => {
     let canvas: HTMLCanvasElement | undefined;
 
     const onChange = (cropper: CropperRef) => {
-        console.log(cropper.getCoordinates(), cropper.getCanvas());
         // dispatch(remCrop());
         //convert canvas to File
         canvas = cropper.getCanvas() ?? undefined;

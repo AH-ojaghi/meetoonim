@@ -11,23 +11,32 @@ const CheckPreloadings: React.FC<{ children: ReactNode, path: IPath }> = ({child
     const params = useParams();
 
     const loadPreloadings = () => {
-        console.log('prmsx');
         if (path.preLoadingMethod) {
+            path.usingCachePreloadingMethod?.forEach(async (method, i) => {
+                let values: {[key: string]: any} = {};
+                if (method.values) {
+                    method.values.forEach(v => {
+                        values[v] =  params[v];
+                    });
+                }
+                values = {...values, ...method.arguments};
+                await dispatch(method.action({...values, isReturnCache: true}));
+                dispatch(method.action(values));
+            });
             path.preLoadingMethod.forEach((method, i) => {
                 let values: {[key: string]: any} = {};
                 if (method.values) {
                     method.values.forEach(v => {
                        values[v] =  params[v];
                     });
-                    console.log('prms', values);
                 }
+                values = {...values, ...method.arguments};
                 dispatch(method.action(values));
             });
         }
     }
 
     useEffect(() => {
-        console.log('isloaded path', path.isLoaded, path.path);
         if (!path.isLoaded) {
             loadPreloadings();
             path.isLoaded = true;
